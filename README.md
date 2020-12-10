@@ -1,1 +1,2 @@
 # weboa
+use lessc
