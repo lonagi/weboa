@@ -1,7 +1,5 @@
 from PIL import Image
-import sys, os
-
-#pip install pillow
+import os
 
 class Proccessing:
     BUILDFOLDER = "build"
@@ -41,7 +39,7 @@ class General(Proccessing):
             #NVGroup
             #New Vektor Group   
         """
-        self.File_Create(self.BUILDFOLDER + "/robots.txt", self.Delete_Lines(_text))
+        self.File_Create(self.BUILDFOLDER + "/robots.txt", self.Trime(_text))
 
     def ico(self):
         img = Image.new('RGB', (64, 64))
@@ -108,4 +106,12 @@ php.robots()
 php.ico()
 php.css()
 php.js()
-php.img()
+php.img()site = PHP()
+site.FS()
+site.index()
+site.robots()
+site.ico()
+site.css()
+site.js()
+site.img()
+site.project()
