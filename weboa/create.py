@@ -10,7 +10,7 @@ class Proccessing:
     def __init__(self):
         self.path = "../"
         self.os = sys.platform
-        #print("Platform",sys.platform)
+        #Printer.info("Platform",sys.platform)
         if(self.os in ["Windows","win32","win64","win"]):
             self.os = "Windows"
 
@@ -34,8 +34,9 @@ class Proccessing:
         return text.replace("\n", "")
 
 class General(Proccessing):
-    def __init__(self):
+    def __init__(self, langs=("en","ru")):
         super().__init__()
+        self.langs = langs
 
     def robots(self):
         _text = """
@@ -73,7 +74,7 @@ class General(Proccessing):
     def readme(self):
         _text = """
         Change ToDo:
-        1. >>> php/configs/dict.php
+        1. >>> php/configs/(en|*).php
         2. >>> php/db.php
         3. >>> /favicon.ico/
         4. >>> /img/favicon.png
@@ -82,13 +83,13 @@ class General(Proccessing):
         """
         self.File_Create(self.BUILDFOLDER + "/README.md",_text)
 
-    def ico_langs(self, langs=("en","ru")):
-        for l in langs:
+    def ico_langs(self):
+        for l in self.langs:
             copy2(self.path + 'res/'+l+'.svg', os.path.join(self.path, self.BUILDFOLDER) + "/img/"+l+".svg")
 
 class PHP(General):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, langs=("en","ru")):
+        super().__init__(langs=langs)
         Printer.log("Start PHP Project")
         Printer.info(f"Your system is {self.os}")
 
@@ -106,56 +107,99 @@ class PHP(General):
         self.Folder_Create(self.BUILDFOLDER+"/php/modules")
 
     def index(self):
-        _text = """ <?php
-                    header("X-Frame-Options: SAMEORIGIN");
-                    header("X-Content-Type-Options: nosniff");
-                    header("X-XSS-Protection: 1; mode=block");
-            
-                    /*LIBS*/
-                    require_once("php/lib/autoload.php");
-                    require_once("php/db.php");
-                    require_once("php/controller/controller.php");
-                    ?>
-                    <!DOCTYPE HTML>
-                    <html lang='<?=$lang;?>'>
-                    <head>
-                        <?php include("php/modules/header.phtml");?>
-                    </head>
-                    <body>
-                    <?php
-                        include_once "php/controller/index.php";
-                    ?>
-                    </body>
-                    </html>        
-        """
+        _text = """
+                <?php
+                header("X-Frame-Options: SAMEORIGIN");
+                header("X-Content-Type-Options: nosniff");
+                header("X-XSS-Protection: 1; mode=block");
+        
+                /*LIBS*/
+                require_once("php/lib/autoload.php");
+                require_once("php/db.php");
+                require_once("php/controller/controller.php");
+                ?>
+                <!DOCTYPE HTML>
+                <html lang='<?=$lang;?>'>
+                <head>
+                    <?php include("php/modules/header.phtml");?>
+                </head>
+                <body>
+                <?php
+                    include_once "php/controller/index.php";
+                ?>
+                </body>
+                </html>        
+            """
         self.File_Create(self.BUILDFOLDER + "/index.php", self.Trime(_text))
 
     def project(self):
         # DATABASE
         _text = """
-               <?php
-               $db = "";
-               $l = "root";
-               $p = "";
-               $setup = R::setup('mysql:host=localhost;dbname='.$db, $l, $p);
-               R::addDatabase($db,'mysql:host=localhost;dbname='.$db, $l, $p);
-               ?>
+                   <?php
+                   $db = "";
+                   $l = "root";
+                   $p = "";
+                   $setup = R::setup('mysql:host=localhost;dbname='.$db, $l, $p);
+                   R::addDatabase($db,'mysql:host=localhost;dbname='.$db, $l, $p);
+                   ?>
                """
         self.File_Create(self.BUILDFOLDER + "/php/db.php", self.Trime(_text))
 
         # API
         _text = """
-               <?php
-               header('Access-Control-Allow-Origin: localhost');
-               header('Content-Type: application/json; charset=utf-8');
-               $output = ["Hello"=>"World"];
-
-               echo json_encode($output,JSON_PRETTY_PRINT);
-               ?>
+                   <?php
+                   header('Access-Control-Allow-Origin: localhost');
+                   header('Content-Type: application/json; charset=utf-8');
+                   $output = ["Hello"=>"World"];
+    
+                   echo json_encode($output,JSON_PRETTY_PRINT);
+                   ?>
                """
         self.File_Create(self.BUILDFOLDER + "/php/api/test.php", self.Trime(_text))
 
-site = PHP()
+        # Consts
+        _text = """
+                    <?php
+                    $DOMAIN = '';
+                    $_DOMAIN = "https://".$DOMAIN;
+                    $SITE_TITLE = '';
+                    $DESCRIPTION = $__translations['d0'];
+                    $KEYWORDS = 'NVG, ';
+                    $MAIN_COLOR = "#";
+                    $CACHE = "7";
+                    $SN_BANNER = "img/sn_share.png?".$CACHE;
+                    ?>
+               """
+        self.File_Create(self.BUILDFOLDER + "/php/configs/consts.php", self.Trime(_text))
+
+        # Consts
+        _text = """
+                    <?php
+                    $DOMAIN = '';
+                    $_DOMAIN = "https://".$DOMAIN;
+                    $SITE_TITLE = '';
+                    $DESCRIPTION = $__translations['d0'];
+                    $KEYWORDS = 'NVG, ';
+                    $MAIN_COLOR = "#";
+                    $CACHE = "7";
+                    $SN_BANNER = "img/sn_share.png?".$CACHE;
+                    ?>
+               """
+        self.File_Create(self.BUILDFOLDER + "/php/configs/consts.php", self.Trime(_text))
+
+        # Dicts
+        _text = """
+                    <?php
+                    $__translations = [
+                        "d0"=>"",
+                    ];?>
+                """
+        for l in self.langs:
+            self.File_Create(self.BUILDFOLDER + f"/php/configs/{l}.php", self.Trime(_text))
+
+
+
+site = PHP(langs=("en","ru","ro"))
 site.FS()
 site.index()
 site.robots()
@@ -165,4 +209,4 @@ site.js()
 site.img()
 site.project()
 site.readme()
-site.ico_langs(langs=("en","ru","ro"))
+site.ico_langs()
