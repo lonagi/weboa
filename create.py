@@ -2,6 +2,17 @@ from PIL import Image
 from shutil import copy2
 import sys, os
 
+class Console_Color:
+    colors = {
+                "secondary": "\033[95m",
+                "info": "\033[94m",
+                "log": "\033[96m",
+                "warning": "\033[93m",
+                "error": "\033[91m",
+                "text": "\033[0m",
+                "BOLD": "\033[1m",
+                "UNDERLINE": "\033[4m"
+            }
 
 class Proccessing:
     BUILDFOLDER = "build"
