@@ -81,6 +81,10 @@ class General(Proccessing):
         """
         self.File_Create(self.BUILDFOLDER + "/README.md",_text)
 
+    def ico_langs(self, langs=("en","ru")):
+        for l in langs:
+            copy2('res/'+l+'.svg', self.BUILDFOLDER + "/img/"+l+".svg")
+
 class PHP(General):
     def __init__(self):
         super().__init__()
@@ -160,3 +164,4 @@ site.js()
 site.img()
 site.project()
 site.readme()
+site.ico_langs(langs=("en","ru","ro"))
