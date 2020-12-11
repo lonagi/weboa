@@ -1,3 +1,4 @@
+from PIL import Image
 import sys, os
 
 #pip install pillow
@@ -32,8 +33,6 @@ class General(Proccessing):
         _text = """
             User-agent: *
             Disallow: /php/
-            Disallow: /music/
-            Disallow: /phtml/
             Disallow: /test.html
             Host: https://
             Clean-param: lang /
@@ -43,6 +42,11 @@ class General(Proccessing):
             #New Vektor Group   
         """
         self.File_Create(self.BUILDFOLDER + "/robots.txt", self.Delete_Lines(_text))
+
+    def ico(self):
+        img = Image.new('RGB', (64, 64))
+        icon_sizes = [(16, 16), (32, 32), (48, 48), (64, 64)]
+        img.save(self.BUILDFOLDER+'/favicon.ico', sizes=icon_sizes)
 
 class PHP(General):
     def FS(self):
