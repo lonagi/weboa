@@ -48,6 +48,20 @@ class General(Proccessing):
         icon_sizes = [(16, 16), (32, 32), (48, 48), (64, 64)]
         img.save(self.BUILDFOLDER+'/favicon.ico', sizes=icon_sizes)
 
+    def css(self):
+        self.File_Create(self.BUILDFOLDER + "/css/styles.css")
+        self.File_Create(self.BUILDFOLDER + "/css/styles.min.css")
+
+    def js(self):
+        self.File_Create(self.BUILDFOLDER + "/js/script.js")
+        self.File_Create(self.BUILDFOLDER + "/js/script.min.js")
+
+    def img(self):
+        img = Image.new('RGB', (128, 128))
+        img.save(self.BUILDFOLDER + '/img/favicon.png')
+        img = Image.new('RGB', (1024, 500))
+        img.save(self.BUILDFOLDER + '/img/sn_share.png')
+
 class PHP(General):
     def FS(self):
         # Creating folders for php project
@@ -91,3 +105,7 @@ php = PHP()
 php.FS()
 php.index()
 php.robots()
+php.ico()
+php.css()
+php.js()
+php.img()
