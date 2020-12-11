@@ -4,9 +4,10 @@ import sys, os
 
 class Console_Color:
     colors = {
-                "secondary": "\033[95m",
-                "info": "\033[94m",
+                "text": "\033[0m",
                 "log": "\033[96m",
+                "info": "\033[94m",
+                "secondary": "\033[95m",
                 "warning": "\033[93m",
                 "error": "\033[91m",
                 "text": "\033[0m",
@@ -14,8 +15,17 @@ class Console_Color:
                 "UNDERLINE": "\033[4m"
             }
 
-    def __init__(self, color = "white"):
+    def __init__(self, color = "text"):
         self.color = self.colors[color]
+
+class Printer:
+
+    @staticmethod
+    def warning(text):
+        color = Console_Color("warning").color
+        print(color, "[Warning]" ,text)
+
+
 class Proccessing:
     BUILDFOLDER = "build"
 
@@ -31,7 +41,7 @@ class Proccessing:
             os.mkdir(os.path.join(self.path, foldername))
             return True
         except FileExistsError:
-            print(f"[Warning] Folder {foldername} exists.")
+            Printer.warning(f"Folder {foldername} exists.")
             return False
 
     def File_Create(self, filename, text=""):
