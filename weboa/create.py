@@ -54,7 +54,7 @@ class General(Proccessing):
     def ico(self):
         img = Image.new('RGB', (64, 64))
         icon_sizes = [(16, 16), (32, 32), (48, 48), (64, 64)]
-        img.save(self.BUILDFOLDER+'/favicon.ico', sizes=icon_sizes)
+        img.save(os.path.join(self.path, self.BUILDFOLDER)+'/favicon.ico', sizes=icon_sizes)
 
     def css(self):
         self.File_Create(self.BUILDFOLDER + "/css/styles.css")
@@ -66,9 +66,9 @@ class General(Proccessing):
 
     def img(self):
         img = Image.new('RGB', (128, 128))
-        img.save(self.BUILDFOLDER + '/img/favicon.png')
+        img.save(os.path.join(self.path, self.BUILDFOLDER) + '/img/favicon.png')
         img = Image.new('RGB', (1024, 500))
-        img.save(self.BUILDFOLDER + '/img/sn_share.png')
+        img.save(os.path.join(self.path, self.BUILDFOLDER) + '/img/sn_share.png')
 
     def readme(self):
         _text = """
@@ -84,7 +84,7 @@ class General(Proccessing):
 
     def ico_langs(self, langs=("en","ru")):
         for l in langs:
-            copy2('res/'+l+'.svg', self.BUILDFOLDER + "/img/"+l+".svg")
+            copy2(self.path + 'res/'+l+'.svg', os.path.join(self.path, self.BUILDFOLDER) + "/img/"+l+".svg")
 
 class PHP(General):
     def __init__(self):
