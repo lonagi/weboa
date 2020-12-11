@@ -25,6 +25,24 @@ class General:
     def del_nl(self,text):
         return text.replace("\n","")
 
+    def robots(self):
+        _text = """
+            User-agent: *
+            Disallow: /php/
+            Disallow: /music/
+            Disallow: /phtml/
+            Disallow: /test.html
+            Host: https://nvg-group.com
+            Sitemap: https://nvg-group.com/sitemap.xml
+            Clean-param: lang /
+            
+            #NVG
+            
+            #NVGroup
+            #New Vektor Group   
+        """
+        self.File_Create(self.BUILDFOLDER + "/robots.txt", self.del_nl(_text))
+
 class PHP(General):
     def FS(self):
         # Creating folders for php project
@@ -38,3 +56,28 @@ class PHP(General):
         self.Folder_Create(self.BUILDFOLDER+"/php/controller")
         self.Folder_Create(self.BUILDFOLDER+"/php/lib")
         self.Folder_Create(self.BUILDFOLDER+"/php/modules")
+
+    def index(self):
+        _text = """ <?php
+                    header("X-Frame-Options: SAMEORIGIN");
+                    header("X-Content-Type-Options: nosniff");
+                    header("X-XSS-Protection: 1; mode=block");
+            
+                    //LIBS
+                    require_once("php/lib/autoload.php");
+                    require_once("php/db.php");
+                    require_once("php/controller/controller.php");
+                    ?>
+                    <!DOCTYPE HTML>
+                    <html lang='<?=$lang;?>'>
+                    <head>
+                        <?php include("php/modules/header.phtml");?>
+                    </head>
+                    <body>
+                    <?php
+                        include_once "php/controller/index.php";
+                    ?>
+                    </body>
+                    </html>        
+        """
+        self.File_Create(self.BUILDFOLDER + "/index.php", self.trim(_text))
