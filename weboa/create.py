@@ -163,21 +163,7 @@ class PHP(General):
                     $DOMAIN = '';
                     $_DOMAIN = "https://".$DOMAIN;
                     $SITE_TITLE = '';
-                    $DESCRIPTION = $__translations['d0'];
-                    $KEYWORDS = 'NVG, ';
-                    $MAIN_COLOR = "#";
-                    $CACHE = "7";
-                    $SN_BANNER = "img/sn_share.png?".$CACHE;
-                    ?>
-               """
-        self.File_Create(self.BUILDFOLDER + "/php/configs/consts.php", self.Trime(_text))
-
-        # Consts
-        _text = """
-                    <?php
-                    $DOMAIN = '';
-                    $_DOMAIN = "https://".$DOMAIN;
-                    $SITE_TITLE = '';
+                    $_SITE_TITLE = '';
                     $DESCRIPTION = $__translations['d0'];
                     $KEYWORDS = 'NVG, ';
                     $MAIN_COLOR = "#";
@@ -196,6 +182,64 @@ class PHP(General):
                 """
         for l in self.langs:
             self.File_Create(self.BUILDFOLDER + f"/php/configs/{l}.php", self.Trime(_text))
+
+        # Controller
+        _text = """
+                    <?php
+                    include_once "language.php";
+                    if(in_array($lang, $langs))
+                        include_once("php/configs/".$lang.".php");
+                    
+                    include_once "php/configs/consts.php";
+                    
+                    /*Stat*/
+                    if($_SERVER['HTTP_HOST']!="localhost") {
+                        $cccc = new nvgData("stati","ips",'ip',$_SITE_TITLE,6,1,1);
+                        $cccc2 = new nvgCount("stati","visitors",$_SITE_TITLE);
+                        $cccc2->enableLangC("langs");
+                        $cccc2->Count();
+                    }
+                    ?>
+                """
+        self.File_Create(self.BUILDFOLDER + "/php/controller/controller.php", self.Trime(_text))
+
+        # Controller
+        _text = """
+                <?php
+                $langs=[' """+"', '".join(self.langs)+""" '];
+                $l2 = ["ru"=>"Русский","en"=>"English"];
+                
+                /*See language from client*/
+                if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+                    $lang = explode(",", explode(";", $_SERVER['HTTP_ACCEPT_LANGUAGE'])[0])[0];
+                else
+                    $lang = false;
+                
+                /*Parse available languages*/
+                if (strstr($lang,'ru'))
+                    $lang = "ru";
+                elseif(strstr($lang,'ro') or strstr($lang,'md'))
+                    $lang = "ro";
+                else
+                    $lang = "en";
+                
+                /*Sync with cookies*/
+                if (isset($_COOKIE['langu']))
+                    $lang = $_COOKIE['langu'];
+                else
+                    setcookie("langu",$lang);
+                
+                /*Force translation*/
+                if(isset($_GET['lang']))
+                {
+                    $lang = $_GET['lang'];
+                    if(in_array($lang,$langs))
+                        setcookie("langu",$lang);
+                    header("Location: ".str_replace("lang=".$lang,"",$_SERVER['REQUEST_URI']));
+                }
+                ?>
+            """
+        self.File_Create(self.BUILDFOLDER + "/php/controller/language.php", self.Trime(_text))
 
 
 
