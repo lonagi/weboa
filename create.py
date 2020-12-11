@@ -92,7 +92,7 @@ class PHP(General):
                     header("X-Content-Type-Options: nosniff");
                     header("X-XSS-Protection: 1; mode=block");
             
-                    //LIBS
+                    /*LIBS*/
                     require_once("php/lib/autoload.php");
                     require_once("php/db.php");
                     require_once("php/controller/controller.php");
@@ -111,14 +111,32 @@ class PHP(General):
         """
         self.File_Create(self.BUILDFOLDER + "/index.php", self.Trime(_text))
 
-php = PHP()
-php.FS()
-php.index()
-php.robots()
-php.ico()
-php.css()
-php.js()
-php.img()site = PHP()
+    def project(self):
+        # DATABASE
+        _text = """
+               <?php
+               $db = "";
+               $l = "root";
+               $p = "";
+               $setup = R::setup('mysql:host=localhost;dbname='.$db, $l, $p);
+               R::addDatabase($db,'mysql:host=localhost;dbname='.$db, $l, $p);
+               ?>
+               """
+        self.File_Create(self.BUILDFOLDER + "/php/db.php", self.Trime(_text))
+
+        # API
+        _text = """
+               <?php
+               header('Access-Control-Allow-Origin: localhost');
+               header('Content-Type: application/json; charset=utf-8');
+               $output = ["Hello"=>"World"];
+
+               echo json_encode($output,JSON_PRETTY_PRINT);
+               ?>
+               """
+        self.File_Create(self.BUILDFOLDER + "/php/api/test.php", self.Trime(_text))
+
+site = PHP()
 site.FS()
 site.index()
 site.robots()
