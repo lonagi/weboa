@@ -14,6 +14,8 @@ class Console_Color:
                 "UNDERLINE": "\033[4m"
             }
 
+    def __init__(self, color = "white"):
+        self.color = self.colors[color]
 class Proccessing:
     BUILDFOLDER = "build"
 
