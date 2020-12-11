@@ -25,3 +25,16 @@ class General:
     def del_nl(self,text):
         return text.replace("\n","")
 
+class PHP(General):
+    def FS(self):
+        # Creating folders for php project
+        self.Folder_Create(self.BUILDFOLDER)
+        self.Folder_Create(self.BUILDFOLDER+"/css")
+        self.Folder_Create(self.BUILDFOLDER+"/js")
+        self.Folder_Create(self.BUILDFOLDER+"/img")
+        self.Folder_Create(self.BUILDFOLDER+"/php")
+        self.Folder_Create(self.BUILDFOLDER+"/php/api")
+        self.Folder_Create(self.BUILDFOLDER+"/php/configs")
+        self.Folder_Create(self.BUILDFOLDER+"/php/controller")
+        self.Folder_Create(self.BUILDFOLDER+"/php/lib")
+        self.Folder_Create(self.BUILDFOLDER+"/php/modules")
