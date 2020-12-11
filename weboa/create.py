@@ -2,7 +2,7 @@ from PIL import Image
 from shutil import copy2
 from weboa.utils import *
 
-import sys, os
+import sys, os, io
 
 class Proccessing:
     BUILDFOLDER = "build"
@@ -24,7 +24,7 @@ class Proccessing:
 
     def File_Create(self, filename, text=""):
         # Creating a file at specified location
-        with open(os.path.join(self.path, filename), 'w') as f:
+        with io.open(os.path.join(self.path, filename), 'w', encoding="utf-8") as f:
             f.write(text)
 
     def Trime(self, text):
