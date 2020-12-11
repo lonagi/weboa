@@ -1,18 +1,24 @@
 from PIL import Image
-import os
+from shutil import copy2
+import sys, os
+
 
 class Proccessing:
     BUILDFOLDER = "build"
 
     def __init__(self):
         self.path = "./"
+        self.os = sys.platform
+        #print("Platform",sys.platform)
+        if(self.os in ["Windows","win32","win64","win"]):
+            self.os = "Windows"
 
     def Folder_Create(self, foldername):
         try:
             os.mkdir(os.path.join(self.path, foldername))
             return True
         except FileExistsError:
-            print(f"Folder {foldername} exists.")
+            print(f"[Warning] Folder {foldername} exists.")
             return False
 
     def File_Create(self, filename, text=""):
@@ -27,6 +33,9 @@ class Proccessing:
         return text.replace("\n", "")
 
 class General(Proccessing):
+    def __init__(self):
+        super().__init__()
+
     def robots(self):
         _text = """
             User-agent: *
@@ -73,6 +82,11 @@ class General(Proccessing):
         self.File_Create(self.BUILDFOLDER + "/README.md",_text)
 
 class PHP(General):
+    def __init__(self):
+        super().__init__()
+        print("[Log] Start PHP Project")
+        print(f"[Log] Your system is {self.os}")
+
     def FS(self):
         # Creating folders for php project
         self.Folder_Create(self.BUILDFOLDER)
