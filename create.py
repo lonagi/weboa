@@ -60,6 +60,18 @@ class General(Proccessing):
         img = Image.new('RGB', (1024, 500))
         img.save(self.BUILDFOLDER + '/img/sn_share.png')
 
+    def readme(self):
+        _text = """
+        Change ToDo:
+        1. >>> php/configs/dict.php
+        2. >>> php/db.php
+        3. >>> /favicon.ico/
+        4. >>> /img/favicon.png
+        5. >>> /img/sn_share.png
+        
+        """
+        self.File_Create(self.BUILDFOLDER + "/README.md",_text)
+
 class PHP(General):
     def FS(self):
         # Creating folders for php project
@@ -115,3 +127,4 @@ site.css()
 site.js()
 site.img()
 site.project()
+site.readme()
