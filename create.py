@@ -10,7 +10,6 @@ class Console_Color:
                 "secondary": "\033[95m",
                 "warning": "\033[93m",
                 "error": "\033[91m",
-                "text": "\033[0m",
                 "BOLD": "\033[1m",
                 "UNDERLINE": "\033[4m"
             }
@@ -23,7 +22,17 @@ class Printer:
     @staticmethod
     def warning(text):
         color = Console_Color("warning").color
-        print(color, "[Warning]" ,text)
+        print(color, "[Warning]", text)
+
+    @staticmethod
+    def log(text):
+        color = Console_Color("log").color
+        print(color, "[Log]", text)
+
+    @staticmethod
+    def info(text):
+        color = Console_Color("info").color
+        print(color, "[Info]", text)
 
 
 class Proccessing:
@@ -111,8 +120,8 @@ class General(Proccessing):
 class PHP(General):
     def __init__(self):
         super().__init__()
-        print("[Log] Start PHP Project")
-        print(f"[Log] Your system is {self.os}")
+        Printer.log("Start PHP Project")
+        Printer.info(f"Your system is {self.os}")
 
     def FS(self):
         # Creating folders for php project
