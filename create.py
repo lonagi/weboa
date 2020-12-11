@@ -18,3 +18,10 @@ class General:
         # Creating a file at specified location
         with open(os.path.join(self.path, filename), 'w') as f:
             f.write(text)
+
+    def trim(self, text):
+        return text.replace("\t","").replace("  ","")
+
+    def del_nl(self,text):
+        return text.replace("\n","")
+
