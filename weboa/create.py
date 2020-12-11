@@ -1,45 +1,14 @@
 from PIL import Image
 from shutil import copy2
+from weboa.utils import *
+
 import sys, os
-
-class Console_Color:
-    colors = {
-                "text": "\033[0m",
-                "log": "\033[96m",
-                "info": "\033[94m",
-                "secondary": "\033[95m",
-                "warning": "\033[93m",
-                "error": "\033[91m",
-                "BOLD": "\033[1m",
-                "UNDERLINE": "\033[4m"
-            }
-
-    def __init__(self, color = "text"):
-        self.color = self.colors[color]
-
-class Printer:
-
-    @staticmethod
-    def warning(text):
-        color = Console_Color("warning").color
-        print(color, "[Warning]", text)
-
-    @staticmethod
-    def log(text):
-        color = Console_Color("log").color
-        print(color, "[Log]", text)
-
-    @staticmethod
-    def info(text):
-        color = Console_Color("info").color
-        print(color, "[Info]", text)
-
 
 class Proccessing:
     BUILDFOLDER = "build"
 
     def __init__(self):
-        self.path = "./"
+        self.path = "../"
         self.os = sys.platform
         #print("Platform",sys.platform)
         if(self.os in ["Windows","win32","win64","win"]):
