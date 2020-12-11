@@ -1,30 +1,33 @@
 import sys, os
 
-class General:
+#pip install pillow
+
+class Proccessing:
     BUILDFOLDER = "build"
 
     def __init__(self):
         self.path = "./"
 
-    def Folder_Create(self,foldername):
+    def Folder_Create(self, foldername):
         try:
-            os.mkdir(os.path.join(self.path,foldername))
+            os.mkdir(os.path.join(self.path, foldername))
             return True
         except FileExistsError:
             print(f"Folder {foldername} exists.")
             return False
 
-    def File_Create(self,filename,text=""):
+    def File_Create(self, filename, text=""):
         # Creating a file at specified location
         with open(os.path.join(self.path, filename), 'w') as f:
             f.write(text)
 
-    def trim(self, text):
-        return text.replace("\t","").replace("  ","")
+    def Trime(self, text):
+        return text.replace("\t", "").replace("  ", "")
 
-    def del_nl(self,text):
-        return text.replace("\n","")
+    def Delete_Lines(self, text):
+        return text.replace("\n", "")
 
+class General(Proccessing):
     def robots(self):
         _text = """
             User-agent: *
@@ -32,16 +35,14 @@ class General:
             Disallow: /music/
             Disallow: /phtml/
             Disallow: /test.html
-            Host: https://nvg-group.com
-            Sitemap: https://nvg-group.com/sitemap.xml
+            Host: https://
             Clean-param: lang /
             
             #NVG
-            
             #NVGroup
             #New Vektor Group   
         """
-        self.File_Create(self.BUILDFOLDER + "/robots.txt", self.del_nl(_text))
+        self.File_Create(self.BUILDFOLDER + "/robots.txt", self.Delete_Lines(_text))
 
 class PHP(General):
     def FS(self):
@@ -80,4 +81,9 @@ class PHP(General):
                     </body>
                     </html>        
         """
-        self.File_Create(self.BUILDFOLDER + "/index.php", self.trim(_text))
+        self.File_Create(self.BUILDFOLDER + "/index.php", self.Trime(_text))
+
+php = PHP()
+php.FS()
+php.index()
+php.robots()
