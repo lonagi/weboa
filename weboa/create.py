@@ -39,18 +39,7 @@ class General(Proccessing):
         self.langs = langs
 
     def robots(self):
-        _text = """
-            User-agent: *
-            Disallow: /php/
-            Disallow: /test.html
-            Host: https://
-            Clean-param: lang /
-            
-            #NVG
-            #NVGroup
-            #New Vektor Group   
-        """
-        self.File_Create(self.BUILDFOLDER + "/robots.txt", self.Trime(_text))
+        copy2(self.path + 'res/misc/robots.txt', os.path.join(self.path, self.BUILDFOLDER) + "/robots.txt")
 
     def ico(self):
         img = Image.new('RGB', (64, 64))
@@ -58,12 +47,14 @@ class General(Proccessing):
         img.save(os.path.join(self.path, self.BUILDFOLDER)+'/favicon.ico', sizes=icon_sizes)
 
     def css(self):
-        self.File_Create(self.BUILDFOLDER + "/css/styles.css")
-        self.File_Create(self.BUILDFOLDER + "/css/styles.min.css")
+        files = ("/css/styles.css", "/css/styles.min.css")
+        for f in files:
+            self.File_Create(self.BUILDFOLDER + f)
 
     def js(self):
-        self.File_Create(self.BUILDFOLDER + "/js/script.js")
-        self.File_Create(self.BUILDFOLDER + "/js/script.min.js")
+        files = ("/js/script.js","/js/script.min.js")
+        for f in files:
+            self.File_Create(self.BUILDFOLDER + f)
 
     def img(self):
         img = Image.new('RGB', (128, 128))
@@ -72,20 +63,11 @@ class General(Proccessing):
         img.save(os.path.join(self.path, self.BUILDFOLDER) + '/img/sn_share.png')
 
     def readme(self):
-        _text = """
-        Change ToDo:
-        1. >>> php/configs/(en|*).php
-        2. >>> php/db.php
-        3. >>> /favicon.ico/
-        4. >>> /img/favicon.png
-        5. >>> /img/sn_share.png
-        
-        """
-        self.File_Create(self.BUILDFOLDER + "/README.md",_text)
+        copy2(self.path + 'res/misc/README.md', os.path.join(self.path, self.BUILDFOLDER) + "/README.md")
 
     def ico_langs(self):
         for l in self.langs:
-            copy2(self.path + 'res/'+l+'.svg', os.path.join(self.path, self.BUILDFOLDER) + "/img/"+l+".svg")
+            copy2(self.path + 'res/ico_langs/'+l+'.svg', os.path.join(self.path, self.BUILDFOLDER) + "/img/"+l+".svg")
 
 class PHP(General):
     def __init__(self, langs=("en","ru")):
@@ -95,83 +77,37 @@ class PHP(General):
 
     def FS(self):
         # Creating folders for php project
-        self.Folder_Create(self.BUILDFOLDER)
-        self.Folder_Create(self.BUILDFOLDER+"/css")
-        self.Folder_Create(self.BUILDFOLDER+"/js")
-        self.Folder_Create(self.BUILDFOLDER+"/img")
-        self.Folder_Create(self.BUILDFOLDER+"/php")
-        self.Folder_Create(self.BUILDFOLDER+"/php/api")
-        self.Folder_Create(self.BUILDFOLDER+"/php/configs")
-        self.Folder_Create(self.BUILDFOLDER+"/php/controller")
-        self.Folder_Create(self.BUILDFOLDER+"/php/lib")
-        self.Folder_Create(self.BUILDFOLDER+"/php/modules")
+        folders = ("","/css","/js","/img","/php","/php/api","/php/configs","/php/controller","/php/lib","/php/modules")
+        for f in folders:
+            self.Folder_Create(self.BUILDFOLDER + f)
 
     def index(self):
-        _text = """
-                <?php
-                header("X-Frame-Options: SAMEORIGIN");
-                header("X-Content-Type-Options: nosniff");
-                header("X-XSS-Protection: 1; mode=block");
-        
-                /*LIBS*/
-                require_once("php/lib/autoload.php");
-                require_once("php/db.php");
-                require_once("php/controller/controller.php");
-                ?>
-                <!DOCTYPE HTML>
-                <html lang='<?=$lang;?>'>
-                <head>
-                    <?php include("php/modules/header.phtml");?>
-                </head>
-                <body>
-                <?php
-                    include_once "php/controller/index.php";
-                ?>
-                </body>
-                </html>        
-            """
-        self.File_Create(self.BUILDFOLDER + "/index.php", self.Trime(_text))
+        copy2(self.path + 'res/phpfs/_index.php', os.path.join(self.path, self.BUILDFOLDER) + "/index.php")
 
     def project(self):
         # DATABASE
-        _text = """
-                   <?php
-                   $db = "";
-                   $l = "root";
-                   $p = "";
-                   $setup = R::setup('mysql:host=localhost;dbname='.$db, $l, $p);
-                   R::addDatabase($db,'mysql:host=localhost;dbname='.$db, $l, $p);
-                   ?>
-               """
-        self.File_Create(self.BUILDFOLDER + "/php/db.php", self.Trime(_text))
+        copy2(self.path + 'res/phpfs/db.php',os.path.join(self.path, self.BUILDFOLDER) + "/php/db.php")
 
         # API
-        _text = """
-                   <?php
-                   header('Access-Control-Allow-Origin: localhost');
-                   header('Content-Type: application/json; charset=utf-8');
-                   $output = ["Hello"=>"World"];
-    
-                   echo json_encode($output,JSON_PRETTY_PRINT);
-                   ?>
-               """
-        self.File_Create(self.BUILDFOLDER + "/php/api/test.php", self.Trime(_text))
+        copy2(self.path + 'res/phpfs/test.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/api/test.php")
 
         # Consts
-        _text = """
-                    <?php
-                    $DOMAIN = '';
-                    $_DOMAIN = "https://".$DOMAIN;
-                    $SITE_TITLE = '';
-                    $_SITE_TITLE = '';
-                    $DESCRIPTION = $__translations['d0'];
-                    $KEYWORDS = 'NVG, ';
-                    $MAIN_COLOR = "#";
-                    $CACHE = "7";
-                    $SN_BANNER = "img/sn_share.png?".$CACHE;
-                    ?>
-               """
-        self.File_Create(self.BUILDFOLDER + "/php/configs/consts.php", self.Trime(_text))
+        copy2(self.path + 'res/phpfs/consts.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/configs/consts.php")
+
+        # Controller
+        copy2(self.path + 'res/phpfs/controller.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/controller.php")
+
+        # Index Router
+        copy2(self.path + 'res/phpfs/index.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/index.php")
+
+        # Router
+        copy2(self.path + 'res/phpfs/router.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/router.php")
+
+        # .htaccess
+        copy2(self.path + 'res/phpfs/.htaccess', os.path.join(self.path, self.BUILDFOLDER) + "/.htaccess")
+
+        # Language system
+        copy2(self.path + 'res/phpfs/language.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/language.php")
 
         # Dicts
         _text = """
@@ -182,65 +118,6 @@ class PHP(General):
                 """
         for l in self.langs:
             self.File_Create(self.BUILDFOLDER + f"/php/configs/{l}.php", self.Trime(_text))
-
-        # Controller
-        _text = """
-                    <?php
-                    include_once "language.php";
-                    if(in_array($lang, $langs))
-                        include_once("php/configs/".$lang.".php");
-                    
-                    include_once "php/configs/consts.php";
-                    
-                    /*Stat*/
-                    if($_SERVER['HTTP_HOST']!="localhost") {
-                        $cccc = new nvgData("stati","ips",'ip',$_SITE_TITLE,6,1,1);
-                        $cccc2 = new nvgCount("stati","visitors",$_SITE_TITLE);
-                        $cccc2->enableLangC("langs");
-                        $cccc2->Count();
-                    }
-                    ?>
-                """
-        self.File_Create(self.BUILDFOLDER + "/php/controller/controller.php", self.Trime(_text))
-
-        # Controller
-        _text = """
-                <?php
-                $langs=[' """+"', '".join(self.langs)+""" '];
-                $l2 = ["ru"=>"Русский","en"=>"English"];
-                
-                /*See language from client*/
-                if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-                    $lang = explode(",", explode(";", $_SERVER['HTTP_ACCEPT_LANGUAGE'])[0])[0];
-                else
-                    $lang = false;
-                
-                /*Parse available languages*/
-                if (strstr($lang,'ru'))
-                    $lang = "ru";
-                elseif(strstr($lang,'ro') or strstr($lang,'md'))
-                    $lang = "ro";
-                else
-                    $lang = "en";
-                
-                /*Sync with cookies*/
-                if (isset($_COOKIE['langu']))
-                    $lang = $_COOKIE['langu'];
-                else
-                    setcookie("langu",$lang);
-                
-                /*Force translation*/
-                if(isset($_GET['lang']))
-                {
-                    $lang = $_GET['lang'];
-                    if(in_array($lang,$langs))
-                        setcookie("langu",$lang);
-                    header("Location: ".str_replace("lang=".$lang,"",$_SERVER['REQUEST_URI']));
-                }
-                ?>
-            """
-        self.File_Create(self.BUILDFOLDER + "/php/controller/language.php", self.Trime(_text))
-
 
 
 site = PHP(langs=("en","ru","ro"))
