@@ -5,9 +5,10 @@ import os
 import json
 __VERSION__ = "0.1.1"
 
+
 class PHP(General):
     def __init__(self, langs=("en","ru")):
-        super().__init__(langs=langs, version=__VERSION__)
+        super().__init__(langs=langs)
         Printer.log("Start PHP Project")
         Printer.info(f"Your system is {self.os}")
         Printer.info(f"Weboa version is {__VERSION__}")
@@ -17,6 +18,7 @@ class PHP(General):
         folders = ("","/css","/js","/img","/php","/php/api","/php/configs","/php/controller","/php/lib","/php/modules")
         for f in folders:
             self.Folder_Create(f)
+        self.File_Create("/.weboa", __VERSION__)
 
     def index(self):
         self.copy('res/phpfs/_index.php',"/index.php")
@@ -40,6 +42,7 @@ class PHP(General):
         self.copy('res/phpfs/test',"/php/api/test.php")             # API
         self.copy('res/phpfs/consts',"/php/configs/consts.php")     # CONSTS
         self.copy('res/phpfs/header', "/php/modules/header.phtml")  # META
+        self.copy('res/phpfs/footer', "/php/modules/footer.phtml")  # SCRIPTS
 
     def libs(self):
         self.copy('res/phpfs/autoload.php', "/php/lib/autoload.php")
@@ -59,14 +62,6 @@ class PHP(General):
 site = PHP(langs=("en","ru","ro"))
 site.FS()
 site.index()
-site.robots()
-site.ico()
-site.css()
-site.js()
-site.img()
-site.language()
 site.controller()
 site.project()
-site.libs()
-site.readme()
-site.ico_langs()
+site.script(UmbrellaJS())

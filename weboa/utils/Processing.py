@@ -15,7 +15,7 @@ class Processing:
 
     def Folder_Create(self, foldername):
         try:
-            os.mkdir(os.path.join(self.path, foldername))
+            os.mkdir(self.path+self.BUILDFOLDER+foldername)
             return True
         except FileExistsError:
             Printer.warning(f"Folder {foldername} exists.")
@@ -23,7 +23,7 @@ class Processing:
 
     def File_Create(self, filename, text=""):
         # Creating a file at specified location
-        with io.open(os.path.join(self.path, self.BUILDFOLDER, filename), 'w', encoding="utf-8") as f:
+        with io.open(os.path.join(self.path, self.BUILDFOLDER)+filename, 'w', encoding="utf-8") as f:
             f.write(text)
 
     def copy(self, src, dst):
