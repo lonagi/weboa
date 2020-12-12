@@ -32,23 +32,23 @@ class Library:
 class UmbrellaJS(Library):
     def __init__(self):
         self.name = "Umbrella JS"
-        self.js = "https://cdn.jsdelivr.net/npm/umbrellajs"
+        self.js = ["https://cdn.jsdelivr.net/npm/umbrellajs"]
 
 class MDB5(Library):
     def __init__(self):
         self.name = "Bootstrap 5 Material 2"
-        self.js = "https://ex.nvg-group.com/libs/mdb/2.2.1/mdb.min.js"
-        self.css = "https://ex.nvg-group.com/libs/mdb/2.2.1/mdb.min.css"
+        self.js = ["https://ex.nvg-group.com/libs/mdb/2.2.1/mdb.min.js"]
+        self.css = ["https://ex.nvg-group.com/libs/mdb/2.2.1/mdb.min.css"]
 
 class FontAwesome(Library):
     def __init__(self):
         self.name = "Font Awesome"
-        self.css = "https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        self.css = ["https://use.fontawesome.com/releases/v5.8.2/css/all.css"]
 
 class Roboto(Library):
     def __init__(self):
         self.name = "Roboto"
-        self.css = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        self.css = ["https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"]
 
 class General(Processing):
     def __init__(self, langs=("en","ru")):
@@ -90,10 +90,20 @@ class General(Processing):
             self.copy('res/ico_langs/'+l+'.svg',"/img/"+l+".svg")
 
     def script(self, jscript):
-        with open(self.path+self.BUILDFOLDER+"/php/modules/footer.phtml","r") as f:
+        with open(self.path + self.BUILDFOLDER + "/php/modules/footer.phtml", "r") as f:
             scripts = f.read()
         scripts = scripts.split("\n")
-        scripts.insert(-1, "<script src='"+jscript.load_script()+"'></script>")
-        Printer.log("Loading "+jscript)
-        with open(self.path+self.BUILDFOLDER+"/php/modules/footer.phtml","w") as f:
-            f.write("\n".join(scripts))
+        Printer.log("Loading " + jscript)
+        for s in jscript.load_script():
+            scripts.insert(-1, "<script src='" + s + "'></script>")
+            with open(self.path + self.BUILDFOLDER + "/php/modules/footer.phtml", "w") as f:
+                f.write("\n".join(scripts))
+
+    def link(self, _link):
+        with open(self.path+self.BUILDFOLDER+"/php/modules/header.phtml","r") as f:
+            _links = f.read()
+        _links = _links.split("\n")
+        for s in _link.load_link():
+            _links.insert(-1, "<link href='" + s + "' rel='stylesheet'/>")
+            with open(self.path + self.BUILDFOLDER + "/php/modules/header.phtml", "w") as f:
+                f.write("\n".join(_links))
