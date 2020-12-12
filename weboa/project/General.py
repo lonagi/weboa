@@ -1,5 +1,6 @@
 from PIL import Image
 from weboa.utils import Processing
+from weboa.utils import Printer
 
 import os
 
@@ -21,11 +22,12 @@ class UmbrellaJS:
 
     def __radd__(self, other):
         return other+self.__str__()
+
+
 class General(Processing):
-    def __init__(self, langs=("en","ru"), version="0"):
+    def __init__(self, langs=("en","ru")):
         super().__init__()
         self.langs = langs
-        self.File_Create("./.weboa",version)
 
     def robots(self):
         self.copy('res/misc/robots.txt',"/robots.txt")
@@ -60,3 +62,12 @@ class General(Processing):
     def ico_langs(self):
         for l in self.langs:
             self.copy('res/ico_langs/'+l+'.svg',"/img/"+l+".svg")
+
+    def script(self, jscript):
+        with open(self.path+self.BUILDFOLDER+"/php/modules/footer.phtml","r") as f:
+            scripts = f.read()
+        scripts = scripts.split("\n")
+        scripts.insert(-1, "<script src='"+jscript.load()+"'></script>")
+        Printer.log("Loading "+jscript)
+        with open(self.path+self.BUILDFOLDER+"/php/modules/footer.phtml","w") as f:
+            f.write("\n".join(scripts))
