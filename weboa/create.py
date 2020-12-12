@@ -74,6 +74,7 @@ class PHP(General):
         self.copy('res/phpfs/consts.php',"/php/configs/consts.php")     # Consts
 
     def libs(self):
+        self.copy('res/phpfs/autoload.php', "/php/lib/autoload.php")
         _path = os.path.join(self.path,'res/phplib/')
         Printer.info("Libs versions:")
         for f in os.listdir(_path):
