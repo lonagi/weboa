@@ -2,6 +2,7 @@ from weboa.utils import *
 from weboa.project import *
 
 import os
+import json
 __VERSION__ = "0.1.1"
 
 class PHP(General):
@@ -43,7 +44,12 @@ class PHP(General):
     def libs(self):
         self.copy('res/phpfs/autoload.php', "/php/lib/autoload.php")
         _path = os.path.join(self.path,'res/phplib/')
-        Printer.info("Libs versions:")
+
+        with open(_path+'libs.json') as json_file:
+            data = json.load(json_file)
+            data = json.dumps(data,indent=2)
+
+        Printer.info("Libs versions:\n"+data)
         for f in os.listdir(_path):
             if(os.path.isdir(_path+f)):
                 self.copytree('res/phplib/'+f,"/php/lib/"+f)
