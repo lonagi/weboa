@@ -27,6 +27,9 @@ class Proccessing:
         with io.open(os.path.join(self.path, filename), 'w', encoding="utf-8") as f:
             f.write(text)
 
+    def copy(self, src, dst):
+        copy2(self.path + src, os.path.join(self.path, self.BUILDFOLDER) + dst)
+
     def Trime(self, text):
         return text.replace("\t", "").replace("  ", "")
 
@@ -39,7 +42,7 @@ class General(Proccessing):
         self.langs = langs
 
     def robots(self):
-        copy2(self.path + 'res/misc/robots.txt', os.path.join(self.path, self.BUILDFOLDER) + "/robots.txt")
+        self.copy('res/misc/robots.txt',"/robots.txt")
 
     def ico(self):
         img = Image.new('RGB', (64, 64))
@@ -63,11 +66,11 @@ class General(Proccessing):
         img.save(os.path.join(self.path, self.BUILDFOLDER) + '/img/sn_share.png')
 
     def readme(self):
-        copy2(self.path + 'res/misc/README.md', os.path.join(self.path, self.BUILDFOLDER) + "/README.md")
+        self.copy('res/misc/README.md',"/README.md")
 
     def ico_langs(self):
         for l in self.langs:
-            copy2(self.path + 'res/ico_langs/'+l+'.svg', os.path.join(self.path, self.BUILDFOLDER) + "/img/"+l+".svg")
+            self.copy('res/ico_langs/'+l+'.svg',"/img/"+l+".svg")
 
 class PHP(General):
     def __init__(self, langs=("en","ru")):
@@ -82,12 +85,11 @@ class PHP(General):
             self.Folder_Create(self.BUILDFOLDER + f)
 
     def index(self):
-        copy2(self.path + 'res/phpfs/_index.php', os.path.join(self.path, self.BUILDFOLDER) + "/index.php")
+        self.copy('res/phpfs/_index.php',"/index.php")
 
     def language(self):
         # Language system
-        copy2(self.path + 'res/phpfs/language.php',
-              os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/language.php")
+        self.copy('res/phpfs/language.php',"/php/controller/language.php")
 
         # Dicts
         _text = """
@@ -102,30 +104,20 @@ class PHP(General):
     def controller(self):
         files = ("controller.php","index.php","router.php")
         for f in files:
-            copy2(self.path + 'res/phpfs/controller.php',
-                  os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/controller.php")
+            self.copy('res/phpfs/controller.php',"/php/controller/controller.php")
 
         # .htaccess
-        copy2(self.path + 'res/phpfs/.htaccess', os.path.join(self.path, self.BUILDFOLDER) + "/.htaccess")
+        self.copy('res/phpfs/.htaccess',"/.htaccess")
 
     def project(self):
-        # DATABASE
-        copy2(self.path + 'res/phpfs/db.php',os.path.join(self.path, self.BUILDFOLDER) + "/php/db.php")
-
-        # API
-        copy2(self.path + 'res/phpfs/test.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/api/test.php")
-
-        # Consts
-        copy2(self.path + 'res/phpfs/consts.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/configs/consts.php")
+        self.copy('res/phpfs/db.php',"/php/db.php")                     # DATABASE
+        self.copy('res/phpfs/test.php',"/php/api/test.php")             # API
+        self.copy('res/phpfs/consts.php',"/php/configs/consts.php")     # Consts
 
     def libs(self):
         files = ("nvg-data.php", "nvg-oau.php", "nvg-pag.php", "nvg-pag-nav.php", "rb.php")
         for f in files:
-            copy2(self.path + 'res/phpfs/controller.php',
-                  os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/controller.php")
-
-
-
+            self.copy('res/phplib/'+f,"/php/lib/"+f)
 
 site = PHP(langs=("en","ru","ro"))
 site.FS()
