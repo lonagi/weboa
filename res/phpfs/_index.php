@@ -16,6 +16,7 @@ require_once("php/controller/controller.php");
 <body>
 <?php
     include_once "php/controller/index.php";
+    include_once "php/modules/footer.phtml";
 ?>
 </body>
 </html>    
