@@ -1,12 +1,9 @@
 <?php
-$langs=[' """+"', '".join(self.langs)+""" '];
+$langs=['ru','en'];
 $l2 = ["ru"=>"Русский","en"=>"English"];
 
 /*See language from client*/
-if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-    $lang = explode(",", explode(";", $_SERVER['HTTP_ACCEPT_LANGUAGE'])[0])[0];
-else
-    $lang = false;
+$lang = (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) ? explode(",", explode(";", $_SERVER['HTTP_ACCEPT_LANGUAGE'])[0])[0] : false;
 
 /*Parse available languages*/
 if (strstr($lang,'ru'))
