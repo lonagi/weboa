@@ -2,18 +2,20 @@ from weboa.utils import *
 from weboa.project import *
 
 import os
+__VERSION__ = "0.1.1"
 
 class PHP(General):
     def __init__(self, langs=("en","ru")):
-        super().__init__(langs=langs)
+        super().__init__(langs=langs, version=__VERSION__)
         Printer.log("Start PHP Project")
         Printer.info(f"Your system is {self.os}")
+        Printer.info(f"Weboa version is {__VERSION__}")
 
     def FS(self):
         # Creating folders for php project
         folders = ("","/css","/js","/img","/php","/php/api","/php/configs","/php/controller","/php/lib","/php/modules")
         for f in folders:
-            self.Folder_Create(self.BUILDFOLDER + f)
+            self.Folder_Create(f)
 
     def index(self):
         self.copy('res/phpfs/_index.php',"/index.php")
