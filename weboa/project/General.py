@@ -4,12 +4,18 @@ from weboa.utils import Printer
 
 import os
 
-class UmbrellaJS:
+class Library:
     def __init__(self):
-        self.name = "Umbrella JS"
-        self.url = "https://cdn.jsdelivr.net/npm/umbrellajs"
-    def load(self):
-        return self.url
+        self.name = ""
+
+    def load_script(self):
+        return self.js
+
+    def load_script(self):
+        return self.js
+
+    def load_link(self):
+        return self.css
 
     def __str__(self):
         return self.name
