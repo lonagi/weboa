@@ -1,5 +1,6 @@
 from PIL import Image
 from shutil import copy2
+from shutil import copytree as copytree2
 from weboa.utils import *
 
 import sys, os, io
@@ -29,6 +30,9 @@ class Proccessing:
 
     def copy(self, src, dst):
         copy2(self.path + src, os.path.join(self.path, self.BUILDFOLDER) + dst)
+
+    def copytree(self, src, dst):
+        copytree2(self.path + src, os.path.join(self.path, self.BUILDFOLDER) + dst)
 
     def Trime(self, text):
         return text.replace("\t", "").replace("  ", "")
@@ -116,8 +120,11 @@ class PHP(General):
 
     def libs(self):
         files = ("nvg-data.php", "nvg-oau.php", "nvg-pag.php", "nvg-pag-nav.php", "rb.php")
+        folders = ["mail"]
         for f in files:
             self.copy('res/phplib/'+f,"/php/lib/"+f)
+        for f in folders:
+            self.copytree('res/phplib/'+f,"/php/lib/"+f)
 
 site = PHP(langs=("en","ru","ro"))
 site.FS()
@@ -130,5 +137,6 @@ site.img()
 site.language()
 site.controller()
 site.project()
+site.libs()
 site.readme()
 site.ico_langs()
