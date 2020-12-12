@@ -32,7 +32,10 @@ class Proccessing:
         copy2(self.path + src, os.path.join(self.path, self.BUILDFOLDER) + dst)
 
     def copytree(self, src, dst):
-        copytree2(self.path + src, os.path.join(self.path, self.BUILDFOLDER) + dst)
+        try:
+            copytree2(self.path + src, os.path.join(self.path, self.BUILDFOLDER) + dst)
+        except FileExistsError:
+            pass
 
     def Trime(self, text):
         return text.replace("\t", "").replace("  ", "")
@@ -111,12 +114,13 @@ class PHP(General):
         self.copy('res/phpfs/consts.php',"/php/configs/consts.php")     # Consts
 
     def libs(self):
-        files = ("nvg-data.php", "nvg-oau.php", "nvg-pag.php", "nvg-pag-nav.php", "rb.php")
-        folders = ["mail"]
-        for f in files:
-            self.copy('res/phplib/'+f,"/php/lib/"+f)
-        for f in folders:
-            self.copytree('res/phplib/'+f,"/php/lib/"+f)
+        _path = os.path.join(self.path,'res/phplib/')
+        Printer.info("Libs versions:")
+        for f in os.listdir(_path):
+            if(os.path.isdir(_path+f)):
+                self.copytree('res/phplib/'+f,"/php/lib/"+f)
+            else:
+                self.copy('res/phplib/' + f, "/php/lib/" + f)
 
 site = PHP(langs=("en","ru","ro"))
 site.FS()
