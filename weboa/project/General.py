@@ -4,9 +4,10 @@ from weboa.utils import Processing
 import os
 
 class General(Processing):
-    def __init__(self, langs=("en","ru")):
+    def __init__(self, langs=("en","ru"), version="0"):
         super().__init__()
         self.langs = langs
+        self.File_Create("./.weboa",version)
 
     def robots(self):
         self.copy('res/misc/robots.txt',"/robots.txt")
@@ -19,12 +20,12 @@ class General(Processing):
     def css(self):
         files = ("/css/styles.css", "/css/styles.min.css")
         for f in files:
-            self.File_Create(self.BUILDFOLDER + f)
+            self.File_Create(f)
 
     def js(self):
         files = ("/js/script.js","/js/script.min.js")
         for f in files:
-            self.File_Create(self.BUILDFOLDER + f)
+            self.File_Create(f)
 
     def img(self):
         img = Image.new('RGB', (128, 128))

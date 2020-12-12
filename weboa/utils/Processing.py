@@ -23,7 +23,7 @@ class Processing:
 
     def File_Create(self, filename, text=""):
         # Creating a file at specified location
-        with io.open(os.path.join(self.path, filename), 'w', encoding="utf-8") as f:
+        with io.open(os.path.join(self.path, self.BUILDFOLDER, filename), 'w', encoding="utf-8") as f:
             f.write(text)
 
     def copy(self, src, dst):
