@@ -94,16 +94,8 @@ class PHP(General):
     def language(self):
         # Language system
         self.copy('res/phpfs/language.php',"/php/controller/language.php")
-
-        # Dicts
-        _text = """
-                            <?php
-                            $__translations = [
-                                "d0"=>"",
-                            ];?>
-                        """
         for l in self.langs:
-            self.File_Create(self.BUILDFOLDER + f"/php/configs/{l}.php", self.Trime(_text))
+            self.copy('res/phpfs/l.php', f"/php/configs/{l}.php")
 
     def controller(self):
         files = ("controller.php","index.php","router.php")
