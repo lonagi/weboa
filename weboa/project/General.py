@@ -34,7 +34,10 @@ class General(Processing):
         img.save(os.path.join(self.path, self.BUILDFOLDER) + '/img/sn_share.png')
 
     def readme(self):
-        self.copy('res/misc/README.md',"/README.md")
+        self.copy('res/misc/README.md', "/README.md")
+
+    def gitignore(self):
+        self.copy('res/misc/gitignore',"/.gitignore")
 
     def ico_langs(self):
         for l in self.langs:
