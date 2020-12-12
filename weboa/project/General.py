@@ -29,6 +29,11 @@ class Library:
     def __radd__(self, other):
         return other+self.__str__()
 
+class UmbrellaJS(Library):
+    def __init__(self):
+        self.name = "Umbrella JS"
+        self.js = "https://cdn.jsdelivr.net/npm/umbrellajs"
+
 class MDB5(Library):
     def __init__(self):
         self.name = "Bootstrap 5 Material 2"
@@ -80,7 +85,7 @@ class General(Processing):
         with open(self.path+self.BUILDFOLDER+"/php/modules/footer.phtml","r") as f:
             scripts = f.read()
         scripts = scripts.split("\n")
-        scripts.insert(-1, "<script src='"+jscript.load()+"'></script>")
+        scripts.insert(-1, "<script src='"+jscript.load_script()+"'></script>")
         Printer.log("Loading "+jscript)
         with open(self.path+self.BUILDFOLDER+"/php/modules/footer.phtml","w") as f:
             f.write("\n".join(scripts))
