@@ -84,6 +84,30 @@ class PHP(General):
     def index(self):
         copy2(self.path + 'res/phpfs/_index.php', os.path.join(self.path, self.BUILDFOLDER) + "/index.php")
 
+    def language(self):
+        # Language system
+        copy2(self.path + 'res/phpfs/language.php',
+              os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/language.php")
+
+        # Dicts
+        _text = """
+                            <?php
+                            $__translations = [
+                                "d0"=>"",
+                            ];?>
+                        """
+        for l in self.langs:
+            self.File_Create(self.BUILDFOLDER + f"/php/configs/{l}.php", self.Trime(_text))
+
+    def controller(self):
+        files = ("controller.php","index.php","router.php")
+        for f in files:
+            copy2(self.path + 'res/phpfs/controller.php',
+                  os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/controller.php")
+
+        # .htaccess
+        copy2(self.path + 'res/phpfs/.htaccess', os.path.join(self.path, self.BUILDFOLDER) + "/.htaccess")
+
     def project(self):
         # DATABASE
         copy2(self.path + 'res/phpfs/db.php',os.path.join(self.path, self.BUILDFOLDER) + "/php/db.php")
@@ -94,30 +118,13 @@ class PHP(General):
         # Consts
         copy2(self.path + 'res/phpfs/consts.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/configs/consts.php")
 
-        # Controller
-        copy2(self.path + 'res/phpfs/controller.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/controller.php")
+    def libs(self):
+        files = ("nvg-data.php", "nvg-oau.php", "nvg-pag.php", "nvg-pag-nav.php", "rb.php")
+        for f in files:
+            copy2(self.path + 'res/phpfs/controller.php',
+                  os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/controller.php")
 
-        # Index Router
-        copy2(self.path + 'res/phpfs/index.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/index.php")
 
-        # Router
-        copy2(self.path + 'res/phpfs/router.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/router.php")
-
-        # .htaccess
-        copy2(self.path + 'res/phpfs/.htaccess', os.path.join(self.path, self.BUILDFOLDER) + "/.htaccess")
-
-        # Language system
-        copy2(self.path + 'res/phpfs/language.php', os.path.join(self.path, self.BUILDFOLDER) + "/php/controller/language.php")
-
-        # Dicts
-        _text = """
-                    <?php
-                    $__translations = [
-                        "d0"=>"",
-                    ];?>
-                """
-        for l in self.langs:
-            self.File_Create(self.BUILDFOLDER + f"/php/configs/{l}.php", self.Trime(_text))
 
 
 site = PHP(langs=("en","ru","ro"))
@@ -128,6 +135,8 @@ site.ico()
 site.css()
 site.js()
 site.img()
+site.language()
+site.controller()
 site.project()
 site.readme()
 site.ico_langs()
