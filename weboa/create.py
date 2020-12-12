@@ -35,7 +35,8 @@ class PHP(General):
     def project(self):
         self.copy('res/phpfs/db',"/php/db.php")                     # DATABASE
         self.copy('res/phpfs/test',"/php/api/test.php")             # API
-        self.copy('res/phpfs/consts',"/php/configs/consts.php")     # Consts
+        self.copy('res/phpfs/consts',"/php/configs/consts.php")     # CONSTS
+        self.copy('res/phpfs/header', "/php/modules/header.phtml")  # META
 
     def libs(self):
         self.copy('res/phpfs/autoload.php', "/php/lib/autoload.php")
