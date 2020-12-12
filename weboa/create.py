@@ -27,7 +27,7 @@ class PHP(General):
     def controller(self):
         files = ("controller.php","index.php","router.php")
         for f in files:
-            self.copy('res/phpfs/controller.php',"/php/controller/controller.php")
+            self.copy('res/phpfs/'+f,"/php/controller/"+f)
 
         # .htaccess
         self.copy('res/phpfs/.htaccess',"/.htaccess")
