@@ -40,7 +40,15 @@ class MDB5(Library):
         self.js = "https://ex.nvg-group.com/libs/mdb/2.2.1/mdb.min.js"
         self.css = "https://ex.nvg-group.com/libs/mdb/2.2.1/mdb.min.css"
 
+class FontAwesome(Library):
+    def __init__(self):
+        self.name = "Font Awesome"
+        self.css = "https://use.fontawesome.com/releases/v5.8.2/css/all.css"
 
+class Roboto(Library):
+    def __init__(self):
+        self.name = "Roboto"
+        self.css = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
 
 class General(Processing):
     def __init__(self, langs=("en","ru")):
