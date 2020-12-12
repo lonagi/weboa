@@ -5,6 +5,7 @@ if(in_array($lang, $langs))
 else
     include_once("php/configs/en.php");
 
+include_once "router.php";
 include_once "php/configs/consts.php";
 
 /*Stat*/
