@@ -1,4 +1,5 @@
 from weboa.project import *
+from weboa import __VERSION__
 import json
 
 class PHP(General):

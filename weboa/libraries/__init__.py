@@ -1,7 +1,3 @@
-from .MDB5 import *
-from .Umbrella import *
-from .Fonts import *
-
 class Library:
     def __init__(self):
         self.name = ""
@@ -26,3 +22,7 @@ class Library:
 
     def __radd__(self, other):
         return other+self.__str__()
+
+from .MDB5 import *
+from .Umbrella import *
+from .Fonts import *
