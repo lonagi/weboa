@@ -4,52 +4,6 @@ from weboa.utils import Printer
 
 import os
 
-class Library:
-    def __init__(self):
-        self.name = ""
-
-    def load_script(self):
-        return self.js
-
-    def load_script(self):
-        return self.js
-
-    def load_link(self):
-        return self.css
-
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return self.__str__()
-
-    def __add__(self, other):
-        return other+self.__str__()
-
-    def __radd__(self, other):
-        return other+self.__str__()
-
-class UmbrellaJS(Library):
-    def __init__(self):
-        self.name = "Umbrella JS"
-        self.js = ["https://cdn.jsdelivr.net/npm/umbrellajs"]
-
-class MDB5(Library):
-    def __init__(self):
-        self.name = "Bootstrap 5 Material 2"
-        self.js = ["https://ex.nvg-group.com/libs/mdb/2.2.1/mdb.min.js"]
-        self.css = ["https://ex.nvg-group.com/libs/mdb/2.2.1/mdb.min.css"]
-
-class FontAwesome(Library):
-    def __init__(self):
-        self.name = "Font Awesome"
-        self.css = ["https://use.fontawesome.com/releases/v5.8.2/css/all.css"]
-
-class Roboto(Library):
-    def __init__(self):
-        self.name = "Roboto"
-        self.css = ["https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"]
-
 class General(Processing):
     def __init__(self, langs=("en","ru")):
         super().__init__()
