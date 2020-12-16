@@ -8,18 +8,21 @@ def runcli():
     commands = {
         "version": ("--version", "-v"),
         "init": ("--init","-i"),
+        "langs": ("--langs", "-l")
     }
 
-    for arg in sys.argv:
-        if arg in commands["version"]:
+    args = sys.argv
+    for i in range(len(args)):
+        if args[i] in commands["version"]:
             print(f"Weboa version is {__VERSION__}")
-        elif arg in commands["init"]:
+        elif args[i] in commands["init"]:
             php=PHP()
             php.FS()
             php.index()
             php.language()
             php.ico()
             php.css()
+            print(f"Langs {args[i+1]}")
 
 if(__name__=="__main__"):
     runcli()
