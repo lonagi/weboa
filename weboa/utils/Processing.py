@@ -1,7 +1,8 @@
 import sys, io
 from shutil import copy2
 from shutil import copytree as copytree2
-from weboa import os
+from weboa import os, json
+from weboa import __VERSION__
 from .Printer import *
 
 class Processing:
@@ -18,6 +19,25 @@ class Processing:
     @staticmethod
     def Weboa_Create():
         return {"version": __VERSION__}
+
+    @staticmethod
+    def Save_Path(_path):
+        try:
+            with open(".weboa", "r") as f:
+                try:
+                    dweboa = json.loads(f.read())
+                except json.decoder.JSONDecodeError:
+                    Printer.warning("json .weboa file is empty!")
+                    dweboa = Processing.Weboa_Create()
+        except FileNotFoundError:
+            Printer.log("Add .weboa file")
+            dweboa = Processing.Weboa_Create()
+
+        with open(".weboa", "w") as f:
+            dweboa["path"] = _path
+            dweboa = json.dumps(dweboa)
+            f.write(dweboa)
+
     def Folder_Create(self, foldername):
         try:
             os.mkdir(self.path+self.BUILDFOLDER+foldername)
