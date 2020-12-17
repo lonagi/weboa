@@ -1,8 +1,7 @@
 from PIL import Image
 from weboa.utils import Processing
 from weboa.utils import Printer
-
-import os
+from weboa import os
 
 class General(Processing):
     def __init__(self, langs=("en","ru")):

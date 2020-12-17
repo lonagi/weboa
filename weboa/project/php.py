@@ -1,6 +1,6 @@
 from weboa.project import *
+from weboa import json
 from weboa import __VERSION__
-import json
 
 class PHP(General):
     def __init__(self, langs=("en","ru")):
