@@ -6,8 +6,6 @@ from weboa import __VERSION__
 from .Printer import *
 
 class Processing:
-
-
     def __init__(self, path = "../"):
         self.path = path
         self.BUILDFOLDER = "build"
@@ -37,6 +35,7 @@ class Processing:
             dweboa["path"] = _path
             dweboa = json.dumps(dweboa)
             f.write(dweboa)
+            Printer.log("Save the project path")
 
     def Folder_Create(self, foldername):
         try:

@@ -18,11 +18,13 @@ def runcli():
             print(f"Weboa version is {__VERSION__}")
         elif args[i] in commands["start"]:
             Processing.Save_Path(os.getcwd())
-
+            Printer.info(f"Weboa is installed at {prepare.Package.stream}")
 
         elif args[i] in commands["init"]:
-            php=PHP(path="./")
-            php.BUILDFOLDER = ""
+            _path = os.getcwd()
+            Processing.Save_Path(_path)
+            php=PHP(path=_path)
+            php.BUILDFOLDER = "/"
             php.FS()
             php.index()
             php.language()
