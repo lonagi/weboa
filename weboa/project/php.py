@@ -17,32 +17,32 @@ class PHP(General):
         self.File_Create("/.weboa", json.dumps(Processing.Weboa_Create()))
 
     def index(self):
-        self.copy('res/phpfs/_index.php',"/index.php")
+        self.copy(prepare.Package.stream + 'phpfs/_index.php',"/index.php")
 
     def language(self):
         # Language system
-        self.copy('res/phpfs/language',"/php/controller/language.php")
+        self.copy(prepare.Package.stream + 'phpfs/language',"/php/controller/language.php")
         for l in self.langs:
-            self.copy('res/phpfs/l', f"/php/configs/{l}.php")
+            self.copy(prepare.Package.stream + 'phpfs/l', f"/php/configs/{l}.php")
 
     def controller(self):
         files = ("controller.php","index.php","router.php")
         for f in files:
-            self.copy('res/phpfs/'+f,"/php/controller/"+f)
+            self.copy(prepare.Package.stream + 'phpfs/'+f,"/php/controller/"+f)
 
         # .htaccess
-        self.copy('res/phpfs/.htaccess',"/.htaccess")
+        self.copy(prepare.Package.stream + 'phpfs/.htaccess',"/.htaccess")
 
     def project(self):
-        self.copy('res/phpfs/db',"/php/db.php")                     # DATABASE
-        self.copy('res/phpfs/test',"/php/api/test.php")             # API
-        self.copy('res/phpfs/consts',"/php/configs/consts.php")     # CONSTS
-        self.copy('res/phpfs/header', "/php/modules/header.phtml")  # META
-        self.copy('res/phpfs/footer', "/php/modules/footer.phtml")  # SCRIPTS
+        self.copy(prepare.Package.stream + 'phpfs/db',"/php/db.php")                     # DATABASE
+        self.copy(prepare.Package.stream + 'phpfs/test',"/php/api/test.php")             # API
+        self.copy(prepare.Package.stream + 'phpfs/consts',"/php/configs/consts.php")     # CONSTS
+        self.copy(prepare.Package.stream + 'phpfs/header', "/php/modules/header.phtml")  # META
+        self.copy(prepare.Package.stream + 'phpfs/footer', "/php/modules/footer.phtml")  # SCRIPTS
 
     def libs(self):
-        self.copy('res/phpfs/autoload.php', "/php/lib/autoload.php")
-        _path = os.path.join(self.path,'res/phplib/')
+        self.copy(prepare.Package.stream + 'phpfs/autoload.php', "/php/lib/autoload.php")
+        _path = os.path.join(self.path,prepare.Package.stream + 'phplib/')
 
         with open(_path+'libs.json') as json_file:
             data = json.load(json_file)
@@ -51,6 +51,6 @@ class PHP(General):
         Printer.info("Libs versions:\n"+data)
         for f in os.listdir(_path):
             if(os.path.isdir(_path+f)):
-                self.copytree('res/phplib/'+f,"/php/lib/"+f)
+                self.copytree(prepare.Package.stream + 'phplib/'+f,"/php/lib/"+f)
             else:
-                self.copy('res/phplib/' + f, "/php/lib/" + f)
+                self.copy(prepare.Package.stream + 'phplib/' + f, "/php/lib/" + f)
