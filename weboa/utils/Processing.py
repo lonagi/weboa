@@ -5,10 +5,11 @@ from weboa import os
 from .Printer import *
 
 class Processing:
-    BUILDFOLDER = "build"
 
-    def __init__(self):
-        self.path = "../"
+
+    def __init__(self, path = "../"):
+        self.path = path
+        self.BUILDFOLDER = "build"
         self.os = sys.platform
         #Printer.info("Platform",sys.platform)
         if(self.os in ["Windows","win32","win64","win"]):

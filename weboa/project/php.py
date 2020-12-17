@@ -3,8 +3,8 @@ from weboa import json
 from weboa import __VERSION__
 
 class PHP(General):
-    def __init__(self, langs=("en","ru")):
-        super().__init__(langs=langs)
+    def __init__(self, langs=("en","ru"), path = "../"):
+        super().__init__(langs=langs,path=path)
         Printer.log("Start PHP Project")
         Printer.info(f"Your system is {self.os}")
         Printer.info(f"Weboa version is {__VERSION__}")

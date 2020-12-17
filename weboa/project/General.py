@@ -4,8 +4,8 @@ from weboa.utils import Printer
 from weboa import os
 
 class General(Processing):
-    def __init__(self, langs=("en","ru")):
-        super().__init__()
+    def __init__(self, langs=("en","ru"), path = "../"):
+        super().__init__(path=path)
         self.langs = langs
 
     def robots(self):
