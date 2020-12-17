@@ -15,6 +15,9 @@ class Processing:
         if(self.os in ["Windows","win32","win64","win"]):
             self.os = "Windows"
 
+    @staticmethod
+    def Weboa_Create():
+        return {"version": __VERSION__}
     def Folder_Create(self, foldername):
         try:
             os.mkdir(self.path+self.BUILDFOLDER+foldername)

@@ -17,22 +17,8 @@ def runcli():
         if args[i] in commands["version"]:
             print(f"Weboa version is {__VERSION__}")
         elif args[i] in commands["start"]:
-            _path = os.getcwd()
-            try:
-                with open(".weboa", "r") as f:
-                    try:
-                        dweboa = json.loads(f.read())
-                    except json.decoder.JSONDecodeError:
-                        Printer.warning("json .weboa file is empty!")
-                        dweboa = {"version": __VERSION__}
-            except FileNotFoundError:
-                Printer.log("Add .weboa file")
-                dweboa = {"version":__VERSION__}
+            Processing.Save_Path(os.getcwd())
 
-            with open(".weboa", "w") as f:
-                dweboa["path"] = _path
-                dweboa = json.dumps(dweboa)
-                f.write(dweboa)
 
         elif args[i] in commands["init"]:
             php=PHP(path="./")
