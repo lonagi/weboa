@@ -17,7 +17,7 @@ def runcli():
     for i in range(len(args)):
         if args[i] in commands["version"]:
             print(f"Weboa version is {__VERSION__}")
-        if args[i] in commands["version"]:
+        elif args[i] in commands["update"]:
             os.system("pip install weboa --upgrade")
             os.system("pip3 install weboa --upgrade")
         elif args[i] in commands["start"]:
