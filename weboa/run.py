@@ -27,6 +27,17 @@ def runcli():
         elif args[i] in commands["init"]:
             _path = os.getcwd()
             Processing.Save_Path(_path)
+
+            try:
+                if commands["langs"][0] in args:
+                    lindex = args.index(commands["langs"][0])
+                elif commands["langs"][1] in args:
+                    lindex = args.index(commands["langs"][1])
+
+                Printer.info(f"Langs {args[lindex+1]}")
+            except IndexError:
+              pass
+
             php=PHP(path="")
             php.BUILDFOLDER = _path+"/"
             php.FS()
@@ -42,7 +53,6 @@ def runcli():
             php.readme()
             php.gitignore()
             php.ico_langs()
-            print(f"Langs {args[i+1]}")
 
 if(__name__=="__main__"):
     runcli()
