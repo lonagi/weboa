@@ -9,13 +9,17 @@ def runcli():
         "version": ("--version", "-v"),
         "init": ("--init","-i"),
         "langs": ("--langs", "-l"),
-        "start": ("--start", "-s")
+        "start": ("--start", "-s"),
+        "update": ("--update","-u")
     }
 
     args = sys.argv
     for i in range(len(args)):
         if args[i] in commands["version"]:
             print(f"Weboa version is {__VERSION__}")
+        if args[i] in commands["version"]:
+            os.system("pip install weboa --upgrade")
+            os.system("pip3 install weboa --upgrade")
         elif args[i] in commands["start"]:
             Processing.Save_Path(os.getcwd())
             Printer.info(f"Weboa is installed at {prepare.Package.stream}")
