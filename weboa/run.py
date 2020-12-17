@@ -27,7 +27,7 @@ def runcli():
         elif args[i] in commands["init"]:
             _path = os.getcwd()
             Processing.Save_Path(_path)
-            php=PHP(path=_path)
+            php=PHP(path="")
             php.BUILDFOLDER = "/"
             php.FS()
             php.index()
