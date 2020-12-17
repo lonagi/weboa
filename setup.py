@@ -3,13 +3,17 @@ from os.path import join, dirname
 
 __PACKAGE__='weboa'
 __DESCRIPTION__='weboa is a cli tool to create templates for websites and preprocessors'
-__VERSION__="0.1.8"
+__VERSION__="0.1.9"
 
 setup(
     name=__PACKAGE__,
     version=__VERSION__,
     packages=find_packages(),
     include_package_data=True,
+    package_data={
+        "": ["*"],
+        "res":["res/*"]
+    },
     description=__DESCRIPTION__,
     long_description=open(join(dirname(__file__), 'README.rst')).read(),
     author="lonagi",
