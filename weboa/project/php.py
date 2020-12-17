@@ -14,7 +14,7 @@ class PHP(General):
         folders = ("","/css","/js","/img","/php","/php/api","/php/configs","/php/controller","/php/lib","/php/modules")
         for f in folders:
             self.Folder_Create(f)
-        self.File_Create("/.weboa", __VERSION__)
+        self.File_Create("/.weboa", json.dumps({"version":__VERSION__}))
 
     def index(self):
         self.copy('res/phpfs/_index.php',"/index.php")
