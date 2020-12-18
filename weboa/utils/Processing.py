@@ -27,6 +27,17 @@ class Processing:
         except FileNotFoundError:
             Printer.error("Weboa project doesn't exist")
             return False
+
+    @staticmethod
+    def Weboa_Add(key, value):
+        _weboa = Processing.Weboa_Open()
+        if(_weboa):
+            _weboa[key] = value
+            Processing.Weboa_Save(_weboa)
+            return True
+        else:
+            return False
+
     @staticmethod
     def Weboa_Save(fweboa):
         with open(".weboa", "w") as f:
