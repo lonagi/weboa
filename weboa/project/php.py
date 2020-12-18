@@ -1,6 +1,6 @@
 from weboa.project import *
 from weboa.utils import *
-from weboa import json, prepare
+from weboa import json, prepare, os
 from weboa import __VERSION__
 
 class PHP(General):
@@ -52,6 +52,6 @@ class PHP(General):
         Printer.info("Libs versions:\n"+data)
         for f in os.listdir(_path):
             if(os.path.isdir(_path+f)):
-                self.copytree(prepare.Package.stream + 'phplib/'+f,"/php/lib/"+f)
+                self.copytree(prepare.Package.stream + 'phplib/' + f,"/php/lib/" + f)
             else:
-                self.copy(prepare.Package.stream + 'phplib/' + f, "/php/lib/" + f)
+                self.copy(prepare.Package.stream + 'phplib/' + f, "/php/lib/" + f + ".php")
