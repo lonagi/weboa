@@ -28,6 +28,12 @@ class Processing:
             Printer.error("Weboa project doesn't exist")
             return False
     @staticmethod
+    def Weboa_Save(fweboa):
+        with open(".weboa", "w") as f:
+            fweboa = json.dumps(fweboa)
+            f.write(fweboa)
+
+    @staticmethod
     def Save_Path(_path):
         try:
             with open(".weboa", "r") as f:
@@ -40,11 +46,9 @@ class Processing:
             Printer.log("Add .weboa file")
             dweboa = Processing.Weboa_Create()
 
-        with open(".weboa", "w") as f:
-            dweboa["path"] = _path
-            dweboa = json.dumps(dweboa)
-            f.write(dweboa)
-            Printer.log("Save the project path")
+        dweboa["path"] = _path
+        Processing.Weboa_Save(dweboa)
+        Printer.log("Save the project path")
 
     def Folder_Create(self, foldername):
         try:
