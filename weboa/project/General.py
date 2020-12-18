@@ -17,8 +17,8 @@ class General(Processing):
         icon_sizes = [(16, 16), (32, 32), (48, 48), (64, 64)]
         img.save(os.path.join(self.path, self.BUILDFOLDER)+'/favicon.ico', sizes=icon_sizes)
 
-    def css(self):
-        files = ("/css/styles.css", "/css/styles.min.css")
+    def css(self, css="css"):
+        files = ("/css/styles."+css, "/css/styles.min."+css)
         for f in files:
             self.File_Create(f)
 

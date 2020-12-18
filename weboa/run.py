@@ -11,10 +11,12 @@ def runcli():
     commands = {
         "version": ("--version", "-v"),
         "init": ("--init","-i"),
-        "langs": ("--langs", "-L"),
         "start": ("--start", "-s"),
         "update": ("--update","-u"),
-        "less": ("--less","-l")
+        "less": ("--less","-l"),
+
+        "langs": ("--langs", "-L"),
+        "css": ("--css")
     }
 
     args = sys.argv
@@ -64,9 +66,17 @@ def runcli():
                 elif commands["langs"][1] in args:
                     lindex = args.index(commands["langs"][1])
 
-                Printer.info(f"Langs {args[lindex+1]}")
+                Printer.info(f"Langs {args[lindex + 1]}")
             except IndexError:
-              pass
+                pass
+
+            try:
+                if commands["css"][0] in args:
+                    cssindex = args.index(commands["css"][0])
+                Printer.info(f"Css {args[cssindex+1]}")
+            except IndexError:
+                pass
+
             php=PHP(path="")
             php.BUILDFOLDER = _path+"/"
             php.FS()
