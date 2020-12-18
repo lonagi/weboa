@@ -28,7 +28,7 @@ def runcli():
             _path = os.getcwd()
             Processing.Save_Path(_path)
             php=PHP(path="")
-            php.BUILDFOLDER = "/"
+            php.BUILDFOLDER = _path+"/"
             php.FS()
             php.index()
             php.language()
