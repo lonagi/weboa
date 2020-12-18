@@ -46,11 +46,11 @@ def runcli():
             _path = os.getcwd()
             _weboa = Processing.Weboa_Open()
             while True:
-                for i in glob.glob(_path + "/*.scss"):
+                for i in glob.glob(_path + "css/*.scss"):
                     if (not Processing.is_file_changed(_weboa, i, precss="scss")):
                         continue
                     Processing.pre_css(_weboa, i, precss="scss")
-                for i in glob.glob(_path+"/*.sass"):
+                for i in glob.glob(_path+"css/*.sass"):
                     if(not Processing.is_file_changed(_weboa, i, precss="sass")):
                         continue
                     Processing.pre_css(_weboa, i, precss="sass")
