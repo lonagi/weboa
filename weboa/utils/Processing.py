@@ -19,6 +19,15 @@ class Processing:
         return {"version": __VERSION__}
 
     @staticmethod
+    def Weboa_Open():
+        try:
+            with open(".weboa", "r") as f:
+                wf = json.loads(f.read())
+            return wf
+        except FileNotFoundError:
+            Printer.error("Weboa project doesn't exist")
+            return False
+    @staticmethod
     def Save_Path(_path):
         try:
             with open(".weboa", "r") as f:
