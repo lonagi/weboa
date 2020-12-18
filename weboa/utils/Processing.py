@@ -15,6 +15,17 @@ class Processing:
         if(self.os in ["Windows","win32","win64","win"]):
             self.os = "Windows"
 
+    @staticmethod
+    def is_file_changed(_weboa, i, precss="less"):
+        if precss not in _weboa.keys():
+            _weboa[precss] = dict()
+        if i not in _weboa[precss].keys():
+            _weboa[precss][i] = 0
+
+        ts0 = _weboa[precss][i]
+        ts1 = os.stat(i).st_mtime
+
+        return ts0 != ts1
 
     @staticmethod
     def pre_css(_weboa, i, precss="less"):
