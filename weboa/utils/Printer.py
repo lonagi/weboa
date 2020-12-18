@@ -8,6 +8,11 @@ class Printer:
         print(color, "[Warning]", text)
 
     @staticmethod
+    def error(text):
+        color = Console_Color("error").color
+        print(color, "[Error]", text)
+
+    @staticmethod
     def log(text):
         color = Console_Color("log").color
         print(color, "[Log]", text)
