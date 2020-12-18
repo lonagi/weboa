@@ -1,9 +1,10 @@
-import sys, io
+import sys, io, lesscpy, sass
 from shutil import copy2
 from shutil import copytree as copytree2
 from weboa import os, json
 from weboa import __VERSION__
 from .Printer import *
+from six import StringIO
 
 class Processing:
     def __init__(self, path = "../"):
@@ -13,6 +14,23 @@ class Processing:
         #Printer.info("Platform",sys.platform)
         if(self.os in ["Windows","win32","win64","win"]):
             self.os = "Windows"
+
+
+    @staticmethod
+    def pre_css(_weboa, i, precss="less"):
+        with open(i, "r") as f:
+            prep = f.read()
+            if precss=="less":
+                css = lesscpy.compile(StringIO(prep), minify=True)
+            elif precss in ("sass","scss"):
+                css = sass.compile(string=prep, output_style="compressed")
+
+        with open(i[:-4] + "css", "w") as f:
+            f.write(css)
+
+        _weboa[precss][i] = os.stat(i).st_mtime
+        Processing.Weboa_Save(_weboa)
+
 
     @staticmethod
     def Weboa_Init():

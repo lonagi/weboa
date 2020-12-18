@@ -3,17 +3,17 @@ from weboa import *
 from weboa import __VERSION__
 import sys
 import glob
-import lesscpy
-from six import StringIO
 
 def runcli():
     print("Welcome to Weboa!")
     commands = {
         "version": ("--version", "-v"),
         "init": ("--init","-i"),
-        "start": ("--start", "-s"),
+        "start": ("--start", "-S"),
         "update": ("--update","-u"),
+
         "less": ("--less","-l"),
+        "sass": ("--sass","--scss","-s"),
 
         "langs": ("--langs", "-L"),
         "css": ("--css")
@@ -35,27 +35,25 @@ def runcli():
         elif args[i] in commands["less"]:
             _path = os.getcwd()
             _weboa = Processing.Weboa_Open()
-
             while True:
                 for i in glob.glob(_path+"/*.less"):
-                    if "less" not in _weboa.keys():
-                        _weboa["less"] = dict()
-                    if i not in _weboa["less"].keys():
-                        _weboa["less"][i] = 0
-
-                    ts0 = _weboa["less"][i]
-                    ts1 = os.stat(i).st_mtime
-
-                    if(ts0==ts1):
+                    if(not Processing.is_file_changed(_weboa, i, precss="less")):
                         continue
+                    Processing.pre_css(_weboa, i, precss="less")
 
-                    with open(i,"r") as f:
-                        less = f.read()
-                        css = lesscpy.compile(StringIO(less), minify=True)
-                    with open(i[:-4]+"css","w") as f:
-                        f.write(css)
-                    _weboa["less"][i] = os.stat(i).st_mtime
-                    Processing.Weboa_Save(_weboa)
+        elif args[i] in commands["sass"]:
+            _path = os.getcwd()
+            _weboa = Processing.Weboa_Open()
+            while True:
+                for i in glob.glob(_path + "/*.scss"):
+                    if (not Processing.is_file_changed(_weboa, i, precss="scss")):
+                        continue
+                    Processing.pre_css(_weboa, i, precss="scss")
+                for i in glob.glob(_path+"/*.sass"):
+                    if(not Processing.is_file_changed(_weboa, i, precss="sass")):
+                        continue
+                    Processing.pre_css(_weboa, i, precss="sass")
+
 
         elif args[i] in commands["init"]:
             _path = os.getcwd()
