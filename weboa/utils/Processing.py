@@ -15,7 +15,7 @@ class Processing:
             self.os = "Windows"
 
     @staticmethod
-    def Weboa_Create():
+    def Weboa_Init():
         return {"version": __VERSION__}
 
     @staticmethod
@@ -41,10 +41,10 @@ class Processing:
                     dweboa = json.loads(f.read())
                 except json.decoder.JSONDecodeError:
                     Printer.warning("json .weboa file is empty!")
-                    dweboa = Processing.Weboa_Create()
+                    dweboa = Processing.Weboa_Init()
         except FileNotFoundError:
             Printer.log("Add .weboa file")
-            dweboa = Processing.Weboa_Create()
+            dweboa = Processing.Weboa_Init()
 
         dweboa["path"] = _path
         Processing.Weboa_Save(dweboa)

@@ -1,5 +1,6 @@
 from weboa.project import *
-from weboa import json
+from weboa.utils import *
+from weboa import json, prepare
 from weboa import __VERSION__
 
 class PHP(General):
@@ -14,7 +15,7 @@ class PHP(General):
         folders = ("","/css","/js","/img","/php","/php/api","/php/configs","/php/controller","/php/lib","/php/modules")
         for f in folders:
             self.Folder_Create(f)
-        self.File_Create("/.weboa", json.dumps(Processing.Weboa_Create()))
+        self.File_Create("/.weboa", json.dumps(Processing.Weboa_Init()))
 
     def index(self):
         self.copy(prepare.Package.stream + 'phpfs/_index.php',"/index.php")
