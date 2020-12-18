@@ -57,6 +57,14 @@ def runcli():
 
 
         elif args[i] in commands["init"]:
+            try:
+                if (args[i] == commands["init"][0]):
+                    _build_folder = "/" + args[i + 1]
+                else:
+                    _build_folder = ""
+            except IndexError:
+                Printer.error("Index Error")
+
             _path = os.getcwd()
             Processing.Save_Path(_path)
             try:
@@ -68,18 +76,22 @@ def runcli():
                     lindex = False
 
                 if(lindex):
-                    Printer.info(f"Langs {args[lindex + 1]}")
+                    langs = args[lindex + 1]
+                    Printer.info(f"Langs {langs}")
+                    langs = langs.split(",")
             except IndexError:
-                pass
+                Printer.error("Index Error")
 
+            precss = "css"
             try:
                 if commands["css"][0] in args:
                     cssindex = args.index(commands["css"][0])
-                    Printer.info(f"Css {args[cssindex+1]}")
+                    precss = args[cssindex+1]
+                    Printer.info(f"Css {precss}")
             except IndexError:
                 pass
 
-            php=PHP(path="")
+            php=PHP(path="", langs=langs)
             php.BUILDFOLDER = _path+"/"
             php.FS()
             php.index()
@@ -87,7 +99,7 @@ def runcli():
             php.project()
             php.libs()
             php.ico()
-            php.css()
+            php.css(precss)
             php.robots()
             php.js()
             php.img()
