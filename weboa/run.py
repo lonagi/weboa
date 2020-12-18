@@ -27,6 +27,7 @@ def runcli():
         elif args[i] in commands["update"]:
             os.system("pip install weboa --upgrade")
             os.system("pip3 install weboa --upgrade")
+            os.system("pip3 install weboa --upgrade")
 
         elif args[i] in commands["start"]:
             Processing.Save_Path(os.getcwd())
