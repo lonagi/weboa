@@ -1,7 +1,7 @@
 <title><?=$SITE_TITLE;?></title>
 <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
 <link rel="image_src" href="<?=$SN_BANNER;?>">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="theme-color" content="<?=$MAIN_COLOR; ?>" />
 <meta name="msapplication-TileColor" content="<?=$MAIN_COLOR; ?>">
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="<?=$DESCRIPTION; ?>">
 <meta name="description" content="<?=$DESCRIPTION; ?>"/>
 <meta itemprop="description" content="<?=$DESCRIPTION; ?>">
-<meta name="twitter:card" value="<?=$DESCRIPTION; ?>">
+<meta name="twitter:card" content="<?=$DESCRIPTION; ?>">
 <meta name="og:description" content="<?=$DESCRIPTION; ?>"/>
 <meta property="og:description" content="<?=$DESCRIPTION; ?>"/>
 <meta name="keywords" content="<?=$KEYWORDS?>"/>
