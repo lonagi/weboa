@@ -41,18 +41,21 @@ def runcli():
         elif args[i] in commands["add"]:
             _lib = args[i+1]
             _frame = args[i+2]
+            backend = General.load(PHP)
+
             if(_lib=="css"):
                 if(_frame=="mdb5"):
-                    pass
+                    backend.link(MDB5())
                 elif(_frame=="mdb"):
                     pass
             elif(_lib=="fonts"):
                 if(_frame=="roboto"):
                     pass
             elif(_lib=="js"):
-                if _frame=="umbrella":
-                    t = PHP()
-                    t.script(UmbrellaJS())
+                if _frame == "umbrella":
+                    backend.script(UmbrellaJS())
+                if _frame=="mdb5":
+                    backend.script(MDB5())
 
         elif args[i] in commands["less"]:
             _path = os.getcwd()

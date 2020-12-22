@@ -11,6 +11,13 @@ class General(Processing.Processing):
         self.langs = langs
         Meta.meta.Weboa_Add("langs",str(self.langs))
 
+    @staticmethod
+    def load(backend):
+        _backend = Meta.meta.Weboa_Open()
+        __backend = backend(path=_backend["path"], langs=_backend["langs"])
+        __backend.BUILDFOLDER = _backend["path"] + _backend["build_folder"]
+        return __backend
+
     def robots(self):
         self.copy(prepare.Package.stream + 'misc/robots.txt',"/robots.txt")
 
