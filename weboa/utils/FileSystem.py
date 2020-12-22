@@ -1,7 +1,8 @@
 from weboa import os
+from weboa.utils import Printer
 
-class FileSystem:
 
+class filesystem:
     @staticmethod
     def is_file_changed(_weboa, i, precss="less"):
         if precss not in _weboa.keys():
@@ -12,4 +13,8 @@ class FileSystem:
         ts0 = _weboa[precss][i]
         ts1 = os.stat(i).st_mtime
 
-        return ts0 != ts1
+        result = ts0 != ts1
+        if(result):
+            Printer.log(f"Compile {precss}")
+
+        return result

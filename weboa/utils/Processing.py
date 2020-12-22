@@ -8,7 +8,7 @@ from .Printer import *
 from six import StringIO
 
 
-class Processing(Meta,FileSystem):
+class Processing(Meta.meta,FileSystem.filesystem):
     def __init__(self, path = "../"):
         self.path = path
         self.BUILDFOLDER = "build"

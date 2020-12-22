@@ -1,7 +1,9 @@
 from weboa import __VERSION__
 from weboa import *
+from weboa.utils import Printer
 
-class Meta:
+
+class meta:
 
     @staticmethod
     def Weboa_Init():
