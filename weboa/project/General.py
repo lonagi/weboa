@@ -27,12 +27,12 @@ class General(Processing.Processing):
         img.save(os.path.join(self.path, self.BUILDFOLDER)+'/favicon.ico', sizes=icon_sizes)
 
     def css(self, css="css"):
-        files = ("/css/styles."+css, "/css/styles.min."+css)
+        files = ["/css/styles."+css]
         for f in files:
             self.File_Create(f)
 
     def js(self):
-        files = ("/js/script.js","/js/script.min.js")
+        files = ["/js/script.js"]
         for f in files:
             self.File_Create(f)
 
