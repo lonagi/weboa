@@ -21,7 +21,7 @@ def runcli():
         "sass": ("--sass","--scss","-s"),
 
         "langs": ("--langs", "-L"),
-        "css": ("--css")
+        "css": ["--css"]
     }
 
     args = sys.argv
@@ -108,8 +108,11 @@ def runcli():
                     langs = args[lindex + 1]
                     Printer.info(f"Langs {langs}")
                     langs = langs.split(",")
+                else:
+                    langs = ("ru", "en")
             except IndexError:
-                Printer.error("Index Error")
+                langs = ("ru","en")
+                Printer.error("Index Error [langs]")
 
             precss = "css"
             try:
@@ -118,13 +121,14 @@ def runcli():
                     precss = args[cssindex+1]
                     Printer.info(f"Css {precss}")
             except IndexError:
-                pass
+                Printer.error("Index Error [css]")
 
             php=PHP(path="", langs=langs)
             php.BUILDFOLDER = _path+"/"
             php.FS()
             php.index()
             php.language()
+            php.controller()
             php.project()
             php.libs()
             php.ico()

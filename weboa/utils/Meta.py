@@ -22,10 +22,10 @@ class meta:
 
     @staticmethod
     def Weboa_Add(key, value):
-        _weboa = Processing.Weboa_Open()
+        _weboa = Processing.Processing.Weboa_Open()
         if (_weboa):
             _weboa[key] = value
-            Processing.Weboa_Save(_weboa)
+            Processing.Processing.Weboa_Save(_weboa)
             return True
         else:
             return False

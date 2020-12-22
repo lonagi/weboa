@@ -15,7 +15,7 @@ class PHP(General):
         folders = ("","/css","/js","/img","/php","/php/api","/php/configs","/php/controller","/php/lib","/php/modules")
         for f in folders:
             self.Folder_Create(f)
-        self.File_Create("/.weboa", json.dumps(Processing.Weboa_Init()))
+        self.File_Create("/.weboa", json.dumps(Processing.Processing.Weboa_Init()))
 
     def index(self):
         self.copy(prepare.Package.stream + 'phpfs/_index.php',"/index.php")
@@ -27,9 +27,9 @@ class PHP(General):
             self.copy(prepare.Package.stream + 'phpfs/l', f"/php/configs/{l}.php")
 
     def controller(self):
-        files = ("controller.php","index.php","router.php")
+        files = ("controller","index","router")
         for f in files:
-            self.copy(prepare.Package.stream + 'phpfs/'+f,"/php/controller/"+f)
+            self.copy(prepare.Package.stream + 'phpfs/'+f,"/php/controller/"+f+".php")
 
         # .htaccess
         self.copy(prepare.Package.stream + 'phpfs/.htaccess',"/.htaccess")
