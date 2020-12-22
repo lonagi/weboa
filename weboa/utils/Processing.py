@@ -13,6 +13,9 @@ class Processing(Meta.meta,FileSystem.filesystem):
         self.path = path
         self.BUILDFOLDER = "build"
         self.os = sys.platform
+        Processing.Save_Path(self.path)
+        Meta.meta.Weboa_Add("build_folder",self.BUILDFOLDER)
+
         if(self.os in ["Windows","win32","win64","win"]):
             self.os = "Windows"
 

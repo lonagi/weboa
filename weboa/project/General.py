@@ -1,6 +1,7 @@
 from PIL import Image
 from weboa.utils import Processing
 from weboa.utils import Printer
+from weboa.utils import Meta
 from weboa import os
 from weboa import prepare
 
@@ -8,6 +9,7 @@ class General(Processing.Processing):
     def __init__(self, langs=("en","ru"), path = "../"):
         super().__init__(path=path)
         self.langs = langs
+        Meta.meta.Weboa_Add("langs",str(self.langs))
 
     def robots(self):
         self.copy(prepare.Package.stream + 'misc/robots.txt',"/robots.txt")

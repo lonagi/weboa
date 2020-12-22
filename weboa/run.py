@@ -15,6 +15,8 @@ def runcli():
         "start": ("--start", "-S"),
         "update": ("--update","-u"),
 
+        "add":("--add","-a"),
+
         "less": ("--less","-l"),
         "sass": ("--sass","--scss","-s"),
 
@@ -35,6 +37,22 @@ def runcli():
         elif args[i] in commands["start"]:
             Processing.Save_Path(os.getcwd())
             Printer.info(f"Weboa is installed at {prepare.Package.stream}")
+
+        elif args[i] in commands["add"]:
+            _lib = args[i+1]
+            _frame = args[i+2]
+            if(_lib=="css"):
+                if(_frame=="mdb5"):
+                    pass
+                elif(_frame=="mdb"):
+                    pass
+            elif(_lib=="fonts"):
+                if(_frame=="roboto"):
+                    pass
+            elif(_lib=="js"):
+                if _frame=="umbrella":
+                    t = PHP()
+                    t.script(UmbrellaJS())
 
         elif args[i] in commands["less"]:
             _path = os.getcwd()
