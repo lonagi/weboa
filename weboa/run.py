@@ -4,6 +4,9 @@ from weboa import __VERSION__
 import sys
 import glob
 
+from weboa.utils.Processing import Processing
+
+
 def runcli():
     print("Welcome to Weboa!")
     commands = {
@@ -36,24 +39,26 @@ def runcli():
         elif args[i] in commands["less"]:
             _path = os.getcwd()
             _weboa = Processing.Weboa_Open()
-            while True:
-                for i in glob.glob(_path+"/*.less"):
-                    if(not Processing.is_file_changed(_weboa, i, precss="less")):
-                        continue
-                    Processing.pre_css(_weboa, i, precss="less")
+            if(_weboa):
+                while True:
+                    for i in glob.glob(_path + "/*.less"):
+                        if (not Processing.is_file_changed(_weboa, i, precss="less")):
+                            continue
+                        Processing.pre_css(_weboa, i, precss="less")
 
         elif args[i] in commands["sass"]:
             _path = os.getcwd()
             _weboa = Processing.Weboa_Open()
-            while True:
-                for i in glob.glob(_path + "css/*.scss"):
-                    if (not Processing.is_file_changed(_weboa, i, precss="scss")):
-                        continue
-                    Processing.pre_css(_weboa, i, precss="scss")
-                for i in glob.glob(_path+"css/*.sass"):
-                    if(not Processing.is_file_changed(_weboa, i, precss="sass")):
-                        continue
-                    Processing.pre_css(_weboa, i, precss="sass")
+            if(_weboa):
+                while True:
+                    for i in glob.glob(_path + "css/*.scss"):
+                        if (not Processing.is_file_changed(_weboa, i, precss="scss")):
+                            continue
+                        Processing.pre_css(_weboa, i, precss="scss")
+                    for i in glob.glob(_path + "css/*.sass"):
+                        if (not Processing.is_file_changed(_weboa, i, precss="sass")):
+                            continue
+                        Processing.pre_css(_weboa, i, precss="sass")
 
 
         elif args[i] in commands["init"]:

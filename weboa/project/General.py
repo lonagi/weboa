@@ -4,7 +4,7 @@ from weboa.utils import Printer
 from weboa import os
 from weboa import prepare
 
-class General(Processing):
+class General(Processing.Processing):
     def __init__(self, langs=("en","ru"), path = "../"):
         super().__init__(path=path)
         self.langs = langs
