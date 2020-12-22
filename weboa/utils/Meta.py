@@ -13,8 +13,9 @@ class meta:
     def Weboa_Open():
         try:
             with open(".weboa", "r") as f:
-                wf = json.loads(f.read())
-            return wf
+                wf = f.read()
+
+            return json.loads(wf)
         except FileNotFoundError:
             Printer.error("Weboa project doesn't exist")
             return False

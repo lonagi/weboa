@@ -39,9 +39,12 @@ def runcli():
         elif args[i] in commands["less"]:
             _path = os.getcwd()
             _weboa = Processing.Weboa_Open()
+            Printer.log(_weboa)
+            Printer.log(_path)
+            Printer.log(glob.glob(_path + "/css/*.less"))
             if(_weboa):
                 while True:
-                    for i in glob.glob(_path + "/*.less"):
+                    for i in glob.glob(_path + "/css/*.less"):
                         if (not Processing.is_file_changed(_weboa, i, precss="less")):
                             continue
                         Processing.pre_css(_weboa, i, precss="less")
@@ -51,11 +54,11 @@ def runcli():
             _weboa = Processing.Weboa_Open()
             if(_weboa):
                 while True:
-                    for i in glob.glob(_path + "css/*.scss"):
+                    for i in glob.glob(_path + "/css/*.scss"):
                         if (not Processing.is_file_changed(_weboa, i, precss="scss")):
                             continue
                         Processing.pre_css(_weboa, i, precss="scss")
-                    for i in glob.glob(_path + "css/*.sass"):
+                    for i in glob.glob(_path + "/css/*.sass"):
                         if (not Processing.is_file_changed(_weboa, i, precss="sass")):
                             continue
                         Processing.pre_css(_weboa, i, precss="sass")
