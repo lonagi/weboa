@@ -3,7 +3,7 @@ from os.path import join, dirname
 
 __PACKAGE__='weboa'
 __DESCRIPTION__='weboa is a cli tool to create templates for websites and preprocessors'
-__VERSION__="0.2.7"
+__VERSION__="0.2.8"
 
 setup(
     name=__PACKAGE__,

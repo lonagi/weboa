@@ -26,5 +26,8 @@ class Library:
 from .MDB5 import *
 from .MDB import *
 from .Bootstrap import *
+
 from .Umbrella import *
+from .JQuery import *
+
 from .Fonts import *
