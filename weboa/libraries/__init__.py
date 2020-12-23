@@ -24,5 +24,7 @@ class Library:
         return other+self.__str__()
 
 from .MDB5 import *
+from .MDB import *
+from .Bootstrap import *
 from .Umbrella import *
 from .Fonts import *

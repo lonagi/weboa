@@ -47,15 +47,23 @@ def runcli():
                 if(_frame=="mdb5"):
                     backend.link(MDB5())
                 elif(_frame=="mdb"):
-                    pass
+                    backend.link(MDB())
+                elif (_frame == "bootstrap"):
+                    backend.link(Bootstrap())
             elif(_lib=="fonts"):
-                if(_frame=="roboto"):
-                    pass
+                if (_frame == "roboto"):
+                    backend.link(Roboto())
+                elif (_frame in ("FontAwesome","fa")):
+                    backend.link(FontAwesome())
             elif(_lib=="js"):
                 if _frame == "umbrella":
                     backend.script(UmbrellaJS())
-                if _frame=="mdb5":
+                elif _frame == "mdb5":
                     backend.script(MDB5())
+                elif _frame == "mdb":
+                    backend.script(MDB())
+                elif (_frame == "bootstrap"):
+                    backend.script(Bootstrap())
 
         elif args[i] in commands["less"]:
             _path = os.getcwd()
