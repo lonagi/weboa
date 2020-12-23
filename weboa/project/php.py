@@ -43,7 +43,8 @@ class PHP(General):
 
     def libs(self):
         self.copy(prepare.Package.stream + 'phpfs/autoload.php', "/php/lib/autoload.php")
-        _path = os.path.join(self.path,prepare.Package.stream + 'phplib/')
+
+        
 
         with open(_path+'libs.json') as json_file:
             data = json.load(json_file)
