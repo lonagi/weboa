@@ -19,5 +19,10 @@ class Downloader:
         text = Downloader.get(_from+pkg["package"]+".php")
 
         if(pkg["isfile"]):
-            with open(_to + pkg + "." + _back, "w") as f:
+            with open(_to + pkg["package"] + "." + _back, "w") as f:
                 f.write(text)
+        if(len(pkg["dep"]) > 0):
+            for d in pkg["dep"].values():
+                with open(_to + d + "." + _back, "w") as f:
+                    textd = Downloader.get(_from + d + ".php")
+                    f.write(textd)
