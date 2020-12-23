@@ -103,15 +103,16 @@ def runcli():
 
 
         elif args[i] in commands["init"]:
+            _path = os.getcwd()
+            _build_folder = _path + "/"
+
             try:
                 if (args[i] == commands["init"][0]):
-                    _build_folder = "/" + args[i + 1]
-                else:
-                    _build_folder = ""
+                    _build_folder += args[i + 1]
+                    os.mkdir(_build_folder)
             except IndexError:
                 Printer.error("Index Error")
 
-            _path = os.getcwd()
             Processing.Save_Path(_path)
             try:
                 if commands["langs"][0] in args:
@@ -140,7 +141,7 @@ def runcli():
             except IndexError:
                 Printer.error("Index Error [css]")
 
-            php=PHP(path="", langs=langs, BUILDFOLDER=_path+"/")
+            php=PHP(path="", langs=langs, BUILDFOLDER=_build_folder)
             php.FS()
             php.index()
             php.language()
