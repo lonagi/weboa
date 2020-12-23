@@ -71,9 +71,8 @@ def runcli():
                 elif (_frame == "bootstrap"):
                     backend.script(Bootstrap())
             elif (_lib == "php"):
-                url = "https://raw.githubusercontent.com/New-Vektor-Group/pkg-repo/main/php/"
-                lib = _frame+".php"
-                Downloader.download(os.path.join(backend.path, backend.BUILDFOLDER) + "/php/lib/"+lib,url+lib)
+                url = "https://raw.githubusercontent.com/New-Vektor-Group/pkg-repo/main/"+_lib+"/"
+                Downloader.download(os.path.join(backend.path, backend.BUILDFOLDER) + "/"+_lib+"/lib/",url,_frame,_lib)
 
         elif args[i] in commands["less"]:
             _path = os.getcwd()
