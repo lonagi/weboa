@@ -123,8 +123,7 @@ def runcli():
             except IndexError:
                 Printer.error("Index Error [css]")
 
-            php=PHP(path="", langs=langs)
-            php.BUILDFOLDER = _path+"/"
+            php=PHP(path="", langs=langs, BUILDFOLDER=_path+"/")
             php.FS()
             php.index()
             php.language()

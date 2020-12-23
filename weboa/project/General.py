@@ -4,18 +4,19 @@ from weboa.utils import Printer
 from weboa.utils import Meta
 from weboa import os
 from weboa import prepare
+from weboa import json
 
 class General(Processing.Processing):
-    def __init__(self, langs=("en","ru"), path = "../"):
-        super().__init__(path=path)
+    def __init__(self, langs=("en","ru"), path = "../", BUILDFOLDER = "build"):
+        super().__init__(path=path, BUILDFOLDER = BUILDFOLDER)
         self.langs = langs
-        Meta.meta.Weboa_Add("langs",str(self.langs))
+        Meta.meta.Weboa_Add("langs",json.dumps(self.langs))
 
     @staticmethod
     def load(backend):
         _backend = Meta.meta.Weboa_Open()
-        __backend = backend(path=_backend["path"], langs=_backend["langs"])
-        __backend.BUILDFOLDER = _backend["path"] + _backend["build_folder"]
+        __backend = backend(path=_backend["rpath"], langs=json.loads(_backend["langs"]))
+        __backend.BUILDFOLDER = _backend["build_folder"]
         return __backend
 
     def robots(self):

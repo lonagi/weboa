@@ -22,6 +22,7 @@ class meta:
 
     @staticmethod
     def Weboa_Add(key, value):
+        Printer.log(f"Weboa Add {value} to {key}")
         _weboa = Processing.Processing.Weboa_Open()
         if (_weboa):
             _weboa[key] = value

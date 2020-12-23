@@ -9,12 +9,12 @@ from six import StringIO
 
 
 class Processing(Meta.meta,FileSystem.filesystem):
-    def __init__(self, path = "../"):
+    def __init__(self, path = "../", BUILDFOLDER = "build"):
         self.path = path
-        self.BUILDFOLDER = "build"
+        self.BUILDFOLDER = BUILDFOLDER
         self.os = sys.platform
-        Processing.Save_Path(self.path)
         Meta.meta.Weboa_Add("build_folder",self.BUILDFOLDER)
+        Meta.meta.Weboa_Add("rpath", self.path)
 
         if(self.os in ["Windows","win32","win64","win"]):
             self.os = "Windows"

@@ -4,8 +4,8 @@ from weboa import json, prepare, os
 from weboa import __VERSION__
 
 class PHP(General):
-    def __init__(self, langs=("en","ru"), path = "../"):
-        super().__init__(langs=langs,path=path)
+    def __init__(self, langs=("en","ru"), path = "../", BUILDFOLDER = "build"):
+        super().__init__(langs=langs,path=path, BUILDFOLDER = BUILDFOLDER)
         Printer.log("Start PHP Project")
         Printer.info(f"Your system is {self.os}")
         Printer.info(f"Weboa version is {__VERSION__}")
@@ -15,7 +15,7 @@ class PHP(General):
         folders = ("","/css","/js","/img","/php","/php/api","/php/configs","/php/controller","/php/lib","/php/modules")
         for f in folders:
             self.Folder_Create(f)
-        self.File_Create("/.weboa", json.dumps(Processing.Processing.Weboa_Init()))
+        #self.File_Create("/.weboa", json.dumps(Processing.Processing.Weboa_Init()))
 
     def index(self):
         self.copy(prepare.Package.stream + 'phpfs/_index.php',"/index.php")
