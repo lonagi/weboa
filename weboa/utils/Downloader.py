@@ -8,5 +8,7 @@ class Downloader:
         return r.text
 
     @staticmethod
-    def download(to,text):
-        pass
+    def download(_to,_from):
+        text = Downloader.get(_from)
+        with open(_to,"w") as f:
+            f.write(text)

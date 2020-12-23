@@ -35,24 +35,9 @@ class PHP(General):
         self.copy(prepare.Package.stream + 'phpfs/.htaccess',"/.htaccess")
 
     def project(self):
-        self.copy(prepare.Package.stream + 'phpfs/db',"/php/db.php")                     # DATABASE
-        self.copy(prepare.Package.stream + 'phpfs/test',"/php/api/test.php")             # API
-        self.copy(prepare.Package.stream + 'phpfs/consts',"/php/configs/consts.php")     # CONSTS
-        self.copy(prepare.Package.stream + 'phpfs/header', "/php/modules/header.phtml")  # META
-        self.copy(prepare.Package.stream + 'phpfs/footer', "/php/modules/footer.phtml")  # SCRIPTS
-
-    def libs(self):
-        self.copy(prepare.Package.stream + 'phpfs/autoload.php', "/php/lib/autoload.php")
-
-        
-
-        with open(_path+'libs.json') as json_file:
-            data = json.load(json_file)
-            data = json.dumps(data,indent=2)
-
-        Printer.info("Libs versions:\n"+data)
-        for f in os.listdir(_path):
-            if(os.path.isdir(_path+f)):
-                self.copytree(prepare.Package.stream + 'phplib/' + f,"/php/lib/" + f)
-            else:
-                self.copy(prepare.Package.stream + 'phplib/' + f, "/php/lib/" + f + ".php")
+        self.copy(prepare.Package.stream + 'phpfs/autoload.php', "/php/lib/autoload.php")   # Autoload
+        self.copy(prepare.Package.stream + 'phpfs/db',"/php/db.php")                        # DATABASE
+        self.copy(prepare.Package.stream + 'phpfs/test',"/php/api/test.php")                # API
+        self.copy(prepare.Package.stream + 'phpfs/consts',"/php/configs/consts.php")        # CONSTS
+        self.copy(prepare.Package.stream + 'phpfs/header', "/php/modules/header.phtml")     # META
+        self.copy(prepare.Package.stream + 'phpfs/footer', "/php/modules/footer.phtml")     # SCRIPTS
