@@ -16,6 +16,7 @@ def runcli():
         "update": ("--update","-u"),
 
         "add":("--add","-a"),
+        "repo":("--repo","-r"),
 
         "less": ("--less","-l"),
         "sass": ("--sass","--scss","-s"),
@@ -37,6 +38,11 @@ def runcli():
         elif args[i] in commands["start"]:
             Processing.Save_Path(os.getcwd())
             Printer.info(f"Weboa is installed at {prepare.Package.stream}")
+
+        elif args[i] in commands["repo"]:
+            url = "https://raw.githubusercontent.com/New-Vektor-Group/pkg-repo/main/php/libs.json"
+            result = Downloader.get(url)
+            print(result)
 
         elif args[i] in commands["add"]:
             _lib = args[i+1]
