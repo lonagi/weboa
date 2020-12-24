@@ -42,7 +42,11 @@ def runcli():
             #JS OBF
 
         elif args[i] in commands["start"]:
+            Meta.meta.Weboa_Save(Meta.meta.Weboa_Init())
             Processing.Save_Path(os.getcwd())
+            Meta.meta.Weboa_Add("build_folder", _path + "/")
+            Meta.meta.Weboa_Add("rpath", "")
+            Meta.meta.Weboa_Add("langs", json.dumps(["en","ru"]))
             Printer.info(f"Weboa is installed at {prepare.Package.stream}")
 
         elif args[i] in commands["repo"]:
