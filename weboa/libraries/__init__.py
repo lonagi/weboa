@@ -5,9 +5,6 @@ class Library:
     def load_script(self):
         return self.js
 
-    def load_script(self):
-        return self.js
-
     def load_link(self):
         return self.css
 
