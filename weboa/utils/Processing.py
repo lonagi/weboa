@@ -23,10 +23,14 @@ class Processing(Meta.meta,FileSystem.filesystem):
     def pre_css(_weboa, i, precss="less"):
         with open(i, "r") as f:
             prep = f.read()
-            if precss=="less":
-                css = lesscpy.compile(StringIO(prep), minify=True)
-            elif precss in ("sass","scss"):
-                css = sass.compile(string=prep, output_style="compressed")
+            try:
+                if precss == "less":
+                    css = lesscpy.compile(StringIO(prep), minify=True)
+                elif precss in ("sass", "scss"):
+                    css = sass.compile(string=prep, output_style="compressed")
+            except:
+                Printer.warning(f"{precss} compiled with an error!")
+                return False;
 
         with open(i[:-4] + "css", "w") as f:
             f.write(css)
