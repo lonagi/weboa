@@ -4,7 +4,7 @@ from weboa import json, prepare, os
 from weboa import __VERSION__
 
 class PHP(General):
-    def __init__(self, langs=("en","ru"), path = "../", BUILDFOLDER = "build"):
+    def __init__(self, langs=("en","ru"), path = "../", BUILDFOLDER = ""):
         super().__init__(langs=langs,path=path, BUILDFOLDER = BUILDFOLDER)
         Printer.log("Start PHP Project")
         Printer.info(f"Your system is {self.os}")

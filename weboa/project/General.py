@@ -7,7 +7,7 @@ from weboa import prepare
 from weboa import json
 
 class General(Processing.Processing):
-    def __init__(self, langs=("en","ru"), path = "../", BUILDFOLDER = "build"):
+    def __init__(self, langs=("en","ru"), path = "../", BUILDFOLDER = "/"):
         super().__init__(path=path, BUILDFOLDER = BUILDFOLDER)
         self.langs = langs
         Meta.meta.Weboa_Add("langs",json.dumps(self.langs))
@@ -15,8 +15,9 @@ class General(Processing.Processing):
     @staticmethod
     def load(backend):
         _backend = Meta.meta.Weboa_Open()
-        __backend = backend(path=_backend["rpath"], langs=json.loads(_backend["langs"]))
-        __backend.BUILDFOLDER = _backend["build_folder"]
+        __backend = backend(path=_backend["rpath"],
+                            langs=json.loads(_backend["langs"]),
+                            BUILDFOLDER = _backend["build_folder"])
         return __backend
 
     def robots(self):

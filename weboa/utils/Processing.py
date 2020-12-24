@@ -9,7 +9,7 @@ from six import StringIO
 
 
 class Processing(Meta.meta,FileSystem.filesystem):
-    def __init__(self, path = "../", BUILDFOLDER = "build"):
+    def __init__(self, path = "../", BUILDFOLDER = ""):
         self.path = path
         self.BUILDFOLDER = BUILDFOLDER
         self.os = sys.platform
