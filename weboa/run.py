@@ -14,6 +14,7 @@ def runcli():
         "init": ("--init","-i"),
         "start": ("--start", "-S"),
         "update": ("--update","-u"),
+        "build": ('--build',"-b"),
 
         "add":("--add","-a"),
         "repo":("--repo","-r"),
@@ -34,6 +35,11 @@ def runcli():
             os.system("pip install weboa --upgrade")
             os.system("pip3 install weboa --upgrade")
             os.system("pip3 install weboa --upgrade")
+
+        elif args[i] in commands["build"]:
+            Processing.minify("js","js")
+            Processing.minify("css", "css")
+            #JS OBF
 
         elif args[i] in commands["start"]:
             Processing.Save_Path(os.getcwd())
