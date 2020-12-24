@@ -54,21 +54,28 @@ class General(Processing.Processing):
         for l in self.langs:
             self.copy(prepare.Package.stream + 'ico_langs/'+l+'.svg',"/img/"+l+".svg")
 
+    def _add(self,wh,f="footer",t="js"):
+        fpath = self.path + self.BUILDFOLDER + "/php/modules/"+f+".phtml"
+        with open(fpath, "r") as f:
+            _Wh = f.read()
+        _Wh = _Wh.split("\n")
+
+        if t=="js":
+            tt = wh.load_script()
+        elif t=="css":
+            tt = wh.load_link()
+
+        for s in tt:
+            if t=="js":
+                _Wh.insert(-1, "<script src='" + s + "'></script>")
+            elif t == "css":
+                _Wh.insert(-1, "<link href='" + s + "' rel='stylesheet'/>")
+
+            with open(fpath, "w") as f:
+                f.write("\n".join(_Wh))
+
     def script(self, jscript):
-        with open(self.path + self.BUILDFOLDER + "/php/modules/footer.phtml", "r") as f:
-            scripts = f.read()
-        scripts = scripts.split("\n")
-        Printer.log("Loading " + jscript)
-        for s in jscript.load_script():
-            scripts.insert(-1, "<script src='" + s + "'></script>")
-            with open(self.path + self.BUILDFOLDER + "/php/modules/footer.phtml", "w") as f:
-                f.write("\n".join(scripts))
+        self._add(jscript)
 
     def link(self, _link):
-        with open(self.path+self.BUILDFOLDER+"/php/modules/header.phtml","r") as f:
-            _links = f.read()
-        _links = _links.split("\n")
-        for s in _link.load_link():
-            _links.insert(-1, "<link href='" + s + "' rel='stylesheet'/>")
-            with open(self.path + self.BUILDFOLDER + "/php/modules/header.phtml", "w") as f:
-                f.write("\n".join(_links))
+        self._add(_link,"header","css")
