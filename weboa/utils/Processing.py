@@ -1,4 +1,4 @@
-import sys, io, lesscpy, sass
+import sys, io, lesscpy, sass, glob
 from shutil import copy2
 from shutil import copytree as copytree2
 from weboa import os, json
@@ -18,6 +18,15 @@ class Processing(Meta.meta,FileSystem.filesystem):
 
         if(self.os in ["Windows","win32","win64","win"]):
             self.os = "Windows"
+
+    @staticmethod
+    def minify(folder,filetype):
+        for f in glob.glob("./"+folder+"/*."+filetype):
+            with open(f, "r") as file:
+                code = file.read()
+            code = code.replace("\n", " ")
+            with open(f, "w") as file:
+                file.write(code)
 
     @staticmethod
     def pre_css(_weboa, i, precss="less"):
