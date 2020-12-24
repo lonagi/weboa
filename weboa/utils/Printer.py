@@ -16,10 +16,10 @@ class Printer:
     def log(text):
         color = Console_Color("log").color
         with open("log.txt","w") as f:
-            f.write(color, "[Log]", text)
+            f.write(color+" [Log] "+str(text))
 
     @staticmethod
     def info(text):
         color = Console_Color("info").color
         with open("log.txt","w") as f:
-            f.write(color, "[Info]", text)
+            f.write(color+" [Info] "+str(text))

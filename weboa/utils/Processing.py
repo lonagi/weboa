@@ -39,13 +39,12 @@ class Processing(Meta.meta,FileSystem.filesystem):
     def Save_Path(_path):
         try:
             with open(".weboa", "r") as f:
-                try:
-                    dweboa = json.loads(f.read())
-                except json.decoder.JSONDecodeError:
-                    Printer.warning("json .weboa file is empty!")
-                    dweboa = Processing.Weboa_Init()
+                dweboa = json.loads(f.read())
         except FileNotFoundError:
             Printer.log("Add .weboa file")
+            dweboa = Processing.Weboa_Init()
+        except json.decoder.JSONDecodeError:
+            Printer.warning("json .weboa file is empty!")
             dweboa = Processing.Weboa_Init()
 
         dweboa["path"] = _path
