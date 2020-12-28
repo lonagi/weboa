@@ -6,6 +6,6 @@ $_SITE_TITLE = '';
 $DESCRIPTION = $__translations['d0'];
 $KEYWORDS = 'NVG, ';
 $MAIN_COLOR = "#";
-$CACHE = "7";
+$CACHE = "";
 $SN_BANNER = "img/sn_share.png?".$CACHE;
 ?>
