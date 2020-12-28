@@ -38,14 +38,14 @@ class Processing(Meta.meta,FileSystem.filesystem):
                 elif precss in ("sass", "scss"):
                     css = sass.compile(string=prep, output_style="compressed")
             except:
-                Printer.warning(f"{precss} compiled with an error!")
-                return False;
+                return False
 
         with open(i[:-4] + "css", "w") as f:
             f.write(css)
 
         _weboa[precss][i] = os.stat(i).st_mtime
         Processing.Weboa_Save(_weboa)
+        return True
 
 
     @staticmethod

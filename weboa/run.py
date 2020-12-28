@@ -100,6 +100,7 @@ def runcli():
         elif args[i] in commands["sass"]:
             _path = os.getcwd()
             _weboa = Processing.Weboa_Open()
+            _warning_was = False
             if(_weboa):
                 while True:
                     for i in glob.glob(_path + "/css/*.scss"):
@@ -109,7 +110,13 @@ def runcli():
                     for i in glob.glob(_path + "/css/*.sass"):
                         if (not Processing.is_file_changed(_weboa, i, precss="sass")):
                             continue
-                        Processing.pre_css(_weboa, i, precss="sass")
+                        _proc = Processing.pre_css(_weboa, i, precss="sass")
+                        if not _proc:
+                            if not _warning_was:
+                                Printer.warning(f"{precss} compiled with an error!")
+                                _warning_was = True
+                        else:
+                            _warning_was = False
 
 
         elif args[i] in commands["init"]:
