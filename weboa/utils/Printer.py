@@ -3,6 +3,16 @@ from .Console_Color import *
 class Printer:
 
     @staticmethod
+    def _dolog(text):
+        try:
+            with open("log.txt","r") as f:
+                log_txt = f.read()
+        except:
+            pass
+        with open("log.txt","w") as f:
+            f.write(text)
+
+    @staticmethod
     def warning(text):
         color = Console_Color("warning").color
         print(color, "[Warning]", text)
