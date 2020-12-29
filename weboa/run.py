@@ -19,6 +19,7 @@ def runcli():
         "add":("--add","-a"),
         "repo":("--repo","-r"),
         "list": ["--list"],
+        "help": ("-h","--help"),
 
         "less": ("--less","-l"),
         "sass": ("--sass","--scss","-s"),
@@ -36,6 +37,30 @@ def runcli():
             os.system("pip install weboa --upgrade")
             os.system("pip3 install weboa --upgrade")
             os.system("pip3 install weboa --upgrade")
+
+        elif args[i] in commands["update"]:
+            print("Usage: weboa [-h] [--init OUTPUT_DIR] [--start] [--langs en...]"
+                  "Project/Package manager. "
+                  ""
+                  "positional arguments: "
+                  "--css\t Select preprocess (less|sass|scss) "
+                  "-L, --langs\t Select languages shortly (ru|en|ro) "
+                  ""
+                  "optional arguments: "
+                  "-h, --help\t Show this help text "
+                  "-a, --add\t Css [framework], js [framework], php [framework], fonts [font] "
+                  "--list\t Select list of all frames for [--add]"
+                  "-r, --repo\t Select list of all PHP packaged "
+                  ""
+                  "-l, --less\t Start LESS watcher. Use with & in the end "
+                  "-s, --sass\t Start SASS watcher. Use with & in the end "
+                  "-s, --scss\t Start SCSS watcher. Use with & in the end "
+                  ""
+                  "-v, --version\t Show current version of Weboa "
+                  "-u, --update\t Update Weboa through pip "
+                  "-b, --build\t Minify .js, .css files "
+                  "-S, --start\t Init .weboa project file "
+                  "-i, --init\t Initi project (use --init with OUTPUT_DIR) ")
 
         elif args[i] in commands["build"]:
             Processing.minify("js","js")
