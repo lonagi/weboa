@@ -18,6 +18,7 @@ def runcli():
 
         "add":("--add","-a"),
         "repo":("--repo","-r"),
+        "list": ["--list"],
 
         "less": ("--less","-l"),
         "sass": ("--sass","--scss","-s"),
@@ -40,6 +41,11 @@ def runcli():
             Processing.minify("js","js")
             Processing.minify("css", "css")
             #JS OBF
+            
+        elif args[i] in commands["list"]:
+            _lib = args[i+1]
+            if _lib:
+                Library.listall(_lib)
 
         elif args[i] in commands["start"]:
             Meta.meta.Weboa_Save(Meta.meta.Weboa_Init())
