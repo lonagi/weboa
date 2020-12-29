@@ -1,8 +1,5 @@
-# weboa
-use lessc
-
-Requirements:  
-`pip install pillow`  
+VISIT  
+https://github.com/lonagi/weboa
 
 
 Installation
@@ -13,4 +10,4 @@ Installation
 Url PyPi
 ~~~~~~~~~~~~
 
-<https://pypi.org/project/weboa/>
+<https://github.com/lonagi/weboa>
