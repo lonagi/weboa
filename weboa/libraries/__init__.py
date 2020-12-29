@@ -20,6 +20,15 @@ class Library:
     def __radd__(self, other):
         return other+self.__str__()
 
+    @staticmethod
+    def listall(w):
+        if w == "css":
+            return ("mdb", "mdb5", "bootstrap")
+        elif w == "js":
+            return ("mdb","mdb5","bootstrap","Umbrella","JQuery")
+        elif w == "fonts":
+            return ("FontAwesome","roboto")
+
 from .MDB5 import *
 from .MDB import *
 from .Bootstrap import *
