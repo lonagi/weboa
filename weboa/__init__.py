@@ -1,4 +1,4 @@
-__VERSION__ = "0.3.1"
+__VERSION__ = "0.3.3"
 
 import os
 import json

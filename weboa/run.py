@@ -38,29 +38,29 @@ def runcli():
             os.system("pip3 install weboa --upgrade")
             os.system("pip3 install weboa --upgrade")
 
-        elif args[i] in commands["update"]:
-            print("Usage: weboa [-h] [--init OUTPUT_DIR] [--start] [--langs en...]"
-                  "Project/Package manager. "
-                  ""
-                  "positional arguments: "
-                  "--css\t Select preprocess (less|sass|scss) "
-                  "-L, --langs\t Select languages shortly (ru|en|ro) "
-                  ""
-                  "optional arguments: "
-                  "-h, --help\t Show this help text "
-                  "-a, --add\t Css [framework], js [framework], php [framework], fonts [font] "
-                  "--list\t Select list of all frames for [--add]"
-                  "-r, --repo\t Select list of all PHP packaged "
-                  ""
-                  "-l, --less\t Start LESS watcher. Use with & in the end "
-                  "-s, --sass\t Start SASS watcher. Use with & in the end "
-                  "-s, --scss\t Start SCSS watcher. Use with & in the end "
-                  ""
-                  "-v, --version\t Show current version of Weboa "
-                  "-u, --update\t Update Weboa through pip "
-                  "-b, --build\t Minify .js, .css files "
-                  "-S, --start\t Init .weboa project file "
-                  "-i, --init\t Initi project (use --init with OUTPUT_DIR) ")
+        elif args[i] in commands["help"]:
+            print("Usage: weboa [-h] [--init OUTPUT_DIR] [--start] [--langs en...]\n"
+                  "Project/Package manager. \n"
+                  "\n"
+                  "positional arguments: \n"
+                  "--css\t\t Select preprocess (less|sass|scss) \n"
+                  "-L, --langs\t\t Select languages shortly (ru|en|ro)\n "
+                  "\n"
+                  "optional arguments: \n"
+                  "-h, --help\t\t Show this help text\n "
+                  "-a, --add\t\t Css [framework], js [framework], php [framework], fonts [font]\n "
+                  "--list\t\t Select list of all frames for [--add]\n"
+                  "-r, --repo\t\t Select list of all PHP packaged\n"
+                  "\n"
+                  "-l, --less\t\t Start LESS watcher. Use with & in the end \n"
+                  "-s, --sass\t\t Start SASS watcher. Use with & in the end\n "
+                  "-s, --scss\t\t Start SCSS watcher. Use with & in the end \n"
+                  "\n"
+                  "-v, --version\t\t Show current version of Weboa \n"
+                  "-u, --update\t\t Update Weboa through pip \n"
+                  "-b, --build\t\t Minify .js, .css files \n"
+                  "-S, --start\t\t Init .weboa project file \n"
+                  "-i, --init\t\t Initi project (use --init with OUTPUT_DIR)\n")
 
         elif args[i] in commands["build"]:
             Processing.minify("js","js")
@@ -70,7 +70,7 @@ def runcli():
         elif args[i] in commands["list"]:
             _lib = args[i+1]
             if _lib:
-                Library.listall(_lib)
+                print(Library.listall(_lib))
 
         elif args[i] in commands["start"]:
             Meta.meta.Weboa_Save(Meta.meta.Weboa_Init())
