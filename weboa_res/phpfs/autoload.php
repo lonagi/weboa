@@ -4,6 +4,9 @@ $scan = scandir($abs);
 unset($scan[0], $scan[1]);
 foreach($scan as $file)
 {
+    if($file=="autoload.php")
+        continue;
+
     if(!is_dir($abs."/".$file))
     {
         if(strpos($file, '.php') !== false)

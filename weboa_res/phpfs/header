@@ -8,7 +8,6 @@
 <meta name="twitter:image" content="<?=$SN_BANNER;?>" />
 <meta itemprop="image" content="<?=$SN_BANNER;?>">
 <meta property="og:image" content="<?=$SN_BANNER;?>"/>
-<meta name="twitter:image" content="<?=$SN_BANNER;?>">
 <meta property="og:title" content="<?=$SITE_TITLE;?>"/>
 <meta name="og:title" content="<?=$SITE_TITLE;?>"/>
 <meta property="twitter:title" content="<?=$SITE_TITLE;?>">
