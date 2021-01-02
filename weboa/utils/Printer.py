@@ -10,7 +10,7 @@ class Printer:
         except:
             pass
         with open("log.txt","w") as f:
-            f.write(text)
+            f.write(log_txt+"\n"+text)
 
     @staticmethod
     def warning(text):
