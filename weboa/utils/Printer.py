@@ -1,16 +1,21 @@
 from .Console_Color import *
+from datetime import datetime
+
+
 
 class Printer:
 
     @staticmethod
     def _dolog(text):
+        today = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         try:
             with open("log.txt","r") as f:
                 log_txt = f.read()
         except:
-            pass
+            log_txt = ""
+
         with open("log.txt","w") as f:
-            f.write(log_txt+"\n"+text)
+            f.write(log_txt+"\n["+today+"]"+text)
 
     @staticmethod
     def stext(text):
