@@ -43,24 +43,24 @@ def runcli():
                   "Project/Package manager. \n"
                   "\n"
                   "positional arguments: \n"
-                  "--css\t\t Select preprocess (less|sass|scss) \n"
-                  "-L, --langs\t\t Select languages shortly (ru|en|ro)\n "
+                  "--css\t\t\t\t Select preprocess (less|sass|scss) \n"
+                  "-L, --langs\t\t\t\t Select languages shortly (ru|en|ro)\n "
                   "\n"
                   "optional arguments: \n"
-                  "-h, --help\t\t Show this help text\n "
-                  "-a, --add\t\t Css [framework], js [framework], php [framework], fonts [font]\n "
-                  "--list\t\t Select list of all frames for [--add]\n"
-                  "-r, --repo\t\t Select list of all PHP packaged\n"
+                  "-h, --help\t\t\t\t Show this help text\n "
+                  "-a, --add\t\t\t\t Css [framework], js [framework], php [framework], fonts [font]\n "
+                  "--list\t\t\t\t Select list of all frames for [--add]\n"
+                  "-r, --repo\t\t\t\t Select list of all PHP packaged\n"
                   "\n"
-                  "-l, --less\t\t Start LESS watcher. Use with & in the end \n"
-                  "-s, --sass\t\t Start SASS watcher. Use with & in the end\n "
-                  "-s, --scss\t\t Start SCSS watcher. Use with & in the end \n"
+                  "-l, --less\t\t\t\t Start LESS watcher. Use with & in the end \n"
+                  "-s, --sass\t\t\t\t Start SASS watcher. Use with & in the end\n "
+                  "-s, --scss\t\t\t\t Start SCSS watcher. Use with & in the end \n"
                   "\n"
-                  "-v, --version\t\t Show current version of Weboa \n"
-                  "-u, --update\t\t Update Weboa through pip \n"
-                  "-b, --build\t\t Minify .js, .css files \n"
-                  "-S, --start\t\t Init .weboa project file \n"
-                  "-i, --init\t\t Initi project (use --init with OUTPUT_DIR)\n")
+                  "-v, --version\t\t\t\t Show current version of Weboa \n"
+                  "-u, --update\t\t\t\t Update Weboa through pip \n"
+                  "-b, --build\t\t\t\t Minify .js, .css files \n"
+                  "-S, --start\t\t\t\t Init .weboa project file \n"
+                  "-i, --init\t\t\t\t Initi project (use --init with OUTPUT_DIR)\n")
 
         elif args[i] in commands["build"]:
             Processing.minify("js","js")
@@ -105,6 +105,10 @@ def runcli():
             elif(_lib=="js"):
                 if _frame == "umbrella":
                     backend.script(UmbrellaJS())
+                elif _frame == "jquery":
+                    backend.script(JQuery())
+                elif _frame == "popper":
+                    backend.script(Popper())
                 elif _frame == "mdb5":
                     backend.script(MDB5())
                 elif _frame == "mdb":

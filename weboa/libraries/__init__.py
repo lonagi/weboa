@@ -25,7 +25,7 @@ class Library:
         if w == "css":
             return ("mdb", "mdb5", "bootstrap")
         elif w == "js":
-            return ("mdb","mdb5","bootstrap","Umbrella","JQuery")
+            return ("mdb","mdb5","bootstrap","umbrella","jquery","popper")
         elif w == "fonts":
             return ("FontAwesome","roboto")
 
@@ -35,5 +35,6 @@ from .Bootstrap import *
 
 from .Umbrella import *
 from .JQuery import *
+from .Popper import *
 
 from .Fonts import *
