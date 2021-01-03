@@ -63,9 +63,19 @@ def runcli():
                   "-i, --init\t\t\t\t Initi project (use --init with OUTPUT_DIR)\n")
 
         elif args[i] in commands["build"]:
-            Processing.minify("js","js")
-            Processing.minify("css", "css")
-            #JS OBF
+            backend = General.load(PHP)
+            try:
+                backend.copytree(".", "build/")
+            except:
+                pass
+
+            Processing.minify("build/js","js")
+            Processing.minify("build/css", "css")
+
+            for f in list(os.walk("./build/php/modules")):
+                fpath = f[0]
+                Processing.minify(fpath, "phtml")
+                Processing.minify(fpath, "html")
             
         elif args[i] in commands["list"]:
             _lib = args[i+1]

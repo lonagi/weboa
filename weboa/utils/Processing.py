@@ -21,7 +21,8 @@ class Processing(Meta.meta,FileSystem.filesystem):
 
     @staticmethod
     def minify(folder,filetype):
-        for f in glob.glob("./"+folder+"/*."+filetype):
+        for f in glob.glob(folder+"/*."+filetype):
+            Printer.log("Minify file " + f)
             with open(f, "r") as file:
                 code = file.read()
             code = code.replace("\n", " ")
