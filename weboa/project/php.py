@@ -27,7 +27,7 @@ class PHP(General):
             self.copy(prepare.Package.stream + 'phpfs/l', f"/php/configs/{l}.php")
 
     def controller(self):
-        files = ("controller","index","router")
+        files = ("controller","index","router","auth")
         for f in files:
             self.copy(prepare.Package.stream + 'phpfs/'+f,"/php/controller/"+f+".php")
 
