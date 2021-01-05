@@ -65,7 +65,7 @@ def runcli():
         elif args[i] in commands["build"]:
             backend = General.load(PHP)
             try:
-                backend.copytree(".", "build/")
+                backend.copytree(".", "./build/")
             except:
                 pass
 
@@ -76,6 +76,20 @@ def runcli():
                 fpath = f[0]
                 Processing.minify(fpath, "phtml")
                 Processing.minify(fpath, "html")
+
+            for f in list(os.walk("./build/css")):
+                if(f[0][-3:]!="css" or f[0][-10:]=="styles.css"):
+                    continue
+
+                with open("./build/css/styles.css", "r") as f:
+                    fw = f.read()
+                with open(f[0],"r") as f:
+                    fw2 = f.read()
+                with open("./build/css/styles.css", "w") as f:
+                    f.write(fw+fw2)
+
+                os.remove(f[0])
+
             
         elif args[i] in commands["list"]:
             _lib = args[i+1]
