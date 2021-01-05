@@ -1,5 +1,5 @@
 <?php
-$abs = "php/lib/";
+$abs = __DIR__;
 $scan = scandir($abs);
 unset($scan[0], $scan[1]);
 foreach($scan as $file)
@@ -13,7 +13,7 @@ foreach($scan as $file)
         {
             $s = $abs."/".$file;
             try {
-            	include_once($s);
+                include_once($s);
             }
             catch(Exception $e) { die("Lib error"); }
         }

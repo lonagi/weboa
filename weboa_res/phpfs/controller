@@ -1,12 +1,14 @@
 <?php
 include_once "language.php";
 if(in_array($lang, $langs))
-    include_once("php/configs/".$lang.".php");
+    include_once $PROJECT_PATH."/../configs/".$lang.".php";
 else
-    include_once("php/configs/en.php");
+	include_once $PROJECT_PATH."/../configs/en.php";
 
+include_once $PROJECT_PATH."/../configs/consts.php";
+include_once "auth.php";
 include_once "router.php";
-include_once "php/configs/consts.php";
+
 
 /*Stat*/
 if($_SERVER['HTTP_HOST']!="localhost") {
@@ -14,5 +16,14 @@ if($_SERVER['HTTP_HOST']!="localhost") {
     $cccc2 = new nvgCount("stati","visitors",$_SITE_TITLE);
     $cccc2->enableLangC("langs");
     $cccc2->Count();
+} else {
+    $user = new class{
+        public $first_name = 'hello';
+        public $last_name = 'world';
+        public $avatar = "f01b884581aedd08352a4b189b30a71b";
+        public $id = 34;
+    };
+
+    //$user = false;
 }
 ?>
