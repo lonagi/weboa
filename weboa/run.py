@@ -98,6 +98,7 @@ def runcli():
                 print("css | js | fonts | php")
 
         elif args[i] in commands["start"]:
+            _path = os.getcwd()
             Meta.meta.Weboa_Save(Meta.meta.Weboa_Init())
             Processing.Save_Path(os.getcwd())
             Meta.meta.Weboa_Add("build_folder", _path + "/")
