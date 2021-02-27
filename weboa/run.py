@@ -92,9 +92,10 @@ def runcli():
 
             
         elif args[i] in commands["list"]:
-            _lib = args[i+1]
-            if _lib:
-                print(Library.listall(_lib))
+            try:
+                print(Library.listall(args[i+1]))
+            except IndexError:
+                print("css | js | fonts | php")
 
         elif args[i] in commands["start"]:
             Meta.meta.Weboa_Save(Meta.meta.Weboa_Init())
