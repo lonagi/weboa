@@ -1,3 +1,4 @@
+<?php
 function hedset($kuda = "?")
 {
     header("Location: ".$kuda);
@@ -51,3 +52,4 @@ if( isset($_COOKIE['nvg_auth_user']) )
         setcookie("nvg_auth_user",0, time() -1,'/');
     R::selectDatabase('default');
 }
+?>
