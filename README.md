@@ -66,6 +66,8 @@ An example for Ubuntu,Debian
   ```sh
   apt install python3 python3-pip
   ```
+  
+**We don't support Python 3.9.x on Windows 10 yet**
 
 ### Installation
 
